@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生成AI最新動向 2026 完全版 — チーム学習コンテンツ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f5f4f0; --surface:#fff; --surface2:#f0ede8; --border:#e0dcd4;
+  --text:#1a1814; --text2:#6b6760; --text3:#9e9b96;
+  --navy:#1e2761; --mid:#4a6fa5; --ice:#cadcfc; --light:#f0f4ff;
+  --accent:#1a5fa8; --accent-bg:#e8f0fb; --accent-text:#0d3d70;
+  --teal:#0f6e56; --teal-bg:#e1f5ee; --teal2:#5dcaa5;
+  --amber:#854f0b; --amber-bg:#faeeda;
+  --purple:#3c3489; --purple-bg:#eeedfe;
+  --coral:#993c1d; --coral-bg:#faece7;
+  --green:#14532d; --green-bg:#dcfce7;
+  --ok:#085041; --ok-bg:#e1f5ee;
+  --ng:#791f1f; --ng-bg:#fcebeb;
+  --r:10px; --rs:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+.hero{background:var(--navy);color:#fff;padding:4rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(202,220,252,.12);}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(202,220,252,.08);}
+.hero-eye{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--ice);margin-bottom:1rem;}
+.hero h1{font-size:clamp(26px,5.5vw,50px);font-weight:700;line-height:1.2;margin-bottom:.4rem;}
+.hero h1 span{color:var(--ice);}
+.hero-sub{font-size:13.5px;color:rgba(255,255,255,.65);margin:.5rem auto 1.5rem;max-width:520px;}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;}
+.badge{font-size:11px;font-family:'DM Mono',monospace;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.12);color:var(--ice);border:1px solid rgba(202,220,252,.3);}
+.dl-btn{display:inline-flex;align-items:center;gap:10px;background:var(--ice);color:var(--navy);font-weight:700;font-size:14px;font-family:'Noto Sans JP',sans-serif;padding:13px 28px;border-radius:var(--rs);text-decoration:none;transition:opacity .15s,transform .15s;border:none;cursor:pointer;}
+.dl-btn:hover{opacity:.88;transform:translateY(-1px);}
+.dl-btn svg{width:17px;height:17px;flex-shrink:0;}
+.hero-note{margin-top:10px;font-size:11px;color:rgba(255,255,255,.38);font-family:'DM Mono',monospace;}
+.part-nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;overflow-x:auto;}
+.part-nav-inner{display:flex;max-width:900px;margin:0 auto;}
+.part-tab{padding:12px 18px;font-size:11.5px;font-weight:500;font-family:'DM Mono',monospace;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;}
+.part-tab:hover{color:var(--text2);}
+.part-tab.active{color:var(--navy);border-bottom-color:var(--navy);}
+.prog-wrap{max-width:900px;margin:1.5rem auto 0;padding:0 1.5rem;}
+.prog-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:5px;}
+.prog-track{height:3px;background:var(--border);border-radius:2px;}
+.prog-fill{height:100%;background:var(--navy);border-radius:2px;transition:width .5s;}
+.part-divider{background:var(--navy);color:#fff;padding:2rem 1.5rem;}
+.part-divider-inner{max-width:900px;margin:0 auto;}
+.part-num{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.12em;color:var(--ice);margin-bottom:.5rem;}
+.part-title{font-size:26px;font-weight:700;}
+.part-sub{font-size:13px;color:rgba(255,255,255,.55);margin-top:.3rem;}
+.section{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;}
+.sec-label{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:.75rem;}
+.sec-title{font-size:21px;font-weight:700;color:var(--text);margin-bottom:1.25rem;line-height:1.35;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;}
+.card-sm{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:1rem;}
+.stat-card{background:var(--navy);border-radius:var(--rs);padding:14px 12px;text-align:center;}
+.stat-card.teal{background:var(--teal);}
+.stat-card.mid{background:var(--mid);}
+.stat-card.purple{background:var(--purple);}
+.stat-n{font-size:21px;font-weight:700;font-family:'DM Mono',monospace;color:#fff;}
+.stat-l{font-size:10px;color:rgba(255,255,255,.7);margin-top:4px;line-height:1.4;}
+.infobox{background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 var(--rs) var(--rs) 0;padding:12px 16px;margin:10px 0;font-size:12.5px;color:var(--text2);line-height:1.75;}
+.infobox strong{color:var(--text);}
+.infobox.teal{border-left-color:var(--teal);}
+.infobox.purple{border-left-color:var(--purple);}
+.infobox.coral{border-left-color:var(--coral);}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 9px;border-radius:10px;margin:2px;}
+.t-blue{background:var(--accent-bg);color:var(--accent-text);}
+.t-teal{background:var(--teal-bg);color:var(--teal);}
+.t-amber{background:var(--amber-bg);color:var(--amber);}
+.t-purple{background:var(--purple-bg);color:var(--purple);}
+.t-coral{background:var(--coral-bg);color:var(--coral);}
+.t-mid{background:var(--light);color:var(--mid);}
+.t-navy{background:var(--light);color:var(--navy);}
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem;}
+.sw-box{border-radius:var(--rs);padding:12px;}
+.sw-box.ok{background:var(--ok-bg);}
+.sw-box.ng{background:var(--ng-bg);}
+.sw-label{font-size:11px;font-weight:700;margin-bottom:8px;}
+.sw-label.ok{color:var(--ok);}
+.sw-label.ng{color:var(--ng);}
+.sw-item{font-size:11px;color:var(--text2);padding:3px 0;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.5;}
+.sw-item:last-child{border-bottom:none;}
+.uc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:1rem;}
+.uc-card{background:var(--surface2);border-radius:var(--rs);padding:12px;border-top:3px solid var(--navy);}
+.uc-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.uc-body{font-size:11px;color:var(--text2);line-height:1.6;}
+.tip-box{background:var(--navy);border-radius:var(--rs);padding:12px 16px;margin-top:12px;}
+.tip-box p{font-size:12px;color:rgba(255,255,255,.75);line-height:1.7;}
+.tip-box strong{color:var(--ice);}
+.cheat-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.cheat-row:last-child{border-bottom:none;}
+.cheat-task{font-size:12.5px;color:var(--text);flex:0 0 195px;}
+.cheat-winner{font-size:10.5px;font-weight:700;padding:4px 11px;border-radius:20px;color:#fff;white-space:nowrap;}
+.cheat-reason{font-size:11.5px;color:var(--text2);flex:1;}
+.ind-card{border-radius:var(--r);padding:1.25rem;border-left:5px solid;}
+.ind-card.mfg{background:#f0f4ff;border-color:var(--mid);}
+.ind-card.med{background:var(--teal-bg);border-color:var(--teal);}
+.ind-card.fin{background:var(--light);border-color:var(--navy);}
+.ind-card.edu{background:var(--purple-bg);border-color:var(--purple);}
+.ind-card.mkt{background:var(--coral-bg);border-color:var(--coral);}
+.ind-card.ret{background:var(--teal-bg);border-color:var(--teal2);}
+.ind-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:.75rem;}
+.ind-item{font-size:12px;color:var(--text2);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06);line-height:1.55;}
+.ind-item:last-child{border-bottom:none;}
+.ind-item::before{content:'▸ ';color:var(--text3);}
+.loop-steps{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:1rem 0;}
+.loop-step{background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border-radius:20px;}
+.loop-arrow{color:var(--text3);font-size:15px;}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.impact-box{border-radius:var(--r);padding:1.25rem;}
+.impact-box.pos{background:var(--green-bg);}
+.impact-box.neg{background:var(--ng-bg);}
+.impact-label{font-size:13px;font-weight:700;margin-bottom:.75rem;}
+.impact-label.pos{color:var(--green);}
+.impact-label.neg{color:var(--ng);}
+.impact-item{font-size:12px;color:var(--text2);padding:4px 0;line-height:1.55;}
+.quiz-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-top:1.5rem;}
+.quiz-label{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:10px;}
+.quiz-q{font-size:14px;font-weight:700;color:var(--text);margin-bottom:12px;line-height:1.6;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:12.5px;cursor:pointer;color:var(--text);background:var(--surface);text-align:left;font-family:'Noto Sans JP',sans-serif;line-height:1.5;transition:all .15s;}
+.opt:hover:not(:disabled){background:var(--surface2);}
+.opt.correct{background:var(--ok-bg);border-color:var(--teal2);color:var(--ok);}
+.opt.wrong{background:var(--ng-bg);border-color:#f09595;color:var(--ng);}
+.feedback{margin-top:10px;padding:10px 14px;border-radius:var(--rs);font-size:12.5px;line-height:1.75;}
+.feedback.ok{background:var(--ok-bg);color:var(--ok);}
+.feedback.ng{background:var(--ng-bg);color:var(--ng);}
+hr.sec{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+.dl-banner{background:var(--navy);color:#fff;padding:2.5rem 1.5rem;text-align:center;margin-top:3rem;}
+.dl-banner h2{font-size:19px;font-weight:700;margin-bottom:.4rem;}
+.dl-banner p{font-size:12.5px;color:rgba(255,255,255,.55);margin-bottom:1.25rem;}
+.site-footer{text-align:center;padding:1.5rem;font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.anim{animation:fadeUp .3s ease both;}
+@media(max-width:640px){
+  .sw-grid,.impact-grid{grid-template-columns:1fr;}
+  .cheat-task{flex:0 0 100%;}
+  .cheat-reason{flex:0 0 100%;}
+  .section{padding:2rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <p class="hero-eye">TEAM LEARNING CONTENT · APRIL 2026</p>
+  <h1>生成AI最新動向<br><span>2026 完全版</span></h1>
+  <p class="hero-sub">業界動向 / 主要6社の詳細比較と活用法 / 業界別事例 / AIエージェント / 社会的影響</p>
+  <div class="hero-badges">
+    <span class="badge">PART 1–5</span><span class="badge">各AI 詳細 + 活用法</span><span class="badge">業界別事例</span><span class="badge">理解度クイズつき</span><span class="badge">Powered by Claude Pro</span>
+  </div>
+  <a class="dl-btn" href="genai_2026_full.pptx" download>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    スライド資料をダウンロード（.pptx / 25枚）
+  </a>
+  <p class="hero-note">無料 · PowerPoint / Google スライドで開けます</p>
+</section>
+
+<nav class="part-nav">
+  <div class="part-nav-inner">
+    <button class="part-tab active" onclick="showPart(0,this)">PART 1 業界動向</button>
+    <button class="part-tab" onclick="showPart(1,this)">PART 2 AI比較</button>
+    <button class="part-tab" onclick="showPart(2,this)">PART 3 業界事例</button>
+    <button class="part-tab" onclick="showPart(3,this)">PART 4 エージェント</button>
+    <button class="part-tab" onclick="showPart(4,this)">PART 5 社会影響</button>
+  </div>
+</nav>
+
+<div class="prog-wrap">
+  <div class="prog-meta"><span id="prog-label">学習進捗</span><span id="prog-pct">0%</span></div>
+  <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+</div>
+
+<!-- PART 1 -->
+<div id="part-0">
+  <div class="part-divider"><div class="part-divider-inner"><p class="part-num">PART 1</p><p class="part-title">業界全体の動向</p><p class="part-sub">普及率・市場規模・競争構図の変化</p></div></div>
+  <div class="section">
+    <p class="sec-label">KEY NUMBERS</p>
+    <p class="sec-title">2026年：「試す年」から「成果を出す年」へ</p>
+    <div class="grid-4" style="margin-bottom:1.5rem;">
+      <div class="stat-card"><div class="stat-n">54.7%</div><div class="stat-l">企業のAI利用率<br>（2024年15% → 2026年）</div></div>
+      <div class="stat-card mid"><div class="stat-n">833億ドル</div><div class="stat-l">2026年<br>世界市場規模予測</div></div>
+      <div class="stat-card teal"><div class="stat-n">1/10以下</div><div class="stat-l">2年前比の<br>APIコスト</div></div>
+      <div class="stat-card purple"><div class="stat-n">2.5兆ドル</div><div class="stat-l">2026年<br>世界AI投資（前年比+44%）</div></div>
+    </div>
+    <div class="infobox"><strong>ROI・成果が問われる時代へ：</strong>企業は「AIで何ができるか」の驚きを卒業し、コスト削減・業務効率化の具体的な数字を求め始めた。</div>
+    <div class="infobox"><strong>用途別の棲み分けが確立：</strong>1社のAIが全用途を制する構図は崩れ、各社が強みの戦場を絞り込む多極化競争へ移行。</div>
+    <div class="infobox"><strong>AI活用企業と非活用企業の二極化：</strong>AI活用に成功した企業は1.7倍の成長を遂げるという試算もあり、格差は急拡大中。</div>
+    <hr class="sec">
+    <p class="sec-label">COMPETITION LANDSCAPE</p>
+    <p class="sec-title">競争構図の変化 — 多極化する戦場</p>
+    <div class="grid-2" style="margin-bottom:1rem;">
+      <div class="card-sm"><strong style="font-size:13px;">OpenAI</strong><div style="font-size:10px;color:var(--text3);margin:3px 0 6px;">GPT-5.4</div><span class="tag t-teal">実務ワークフロー</span><p style="font-size:12px;color:var(--text2);margin-top:6px;">コンシューマー向けの入口として圧倒的シェア。スーパーアプリ戦略。</p></div>
+      <div class="card-sm"><strong style="font-size:13px;">Anthropic</strong><div style="font-size:10px;color:var(--text3);margin:3px 0 6px;">Claude Opus 4.7</div><span class="tag t-purple">コーディング・企業向け</span><p style="font-size:12px;color:var(--text2);margin-top:6px;">B2B特化。Fortune 100の8割が基幹業務に採用。</p></div>
+      <div class="card-sm"><strong style="font-size:13px;">Google</strong><div style="font-size:10px;color:var(--text3);margin:3px 0 6px;">Gemini 3.1 Pro</div><span class="tag t-blue">推論・マルチモーダル</span><p style="font-size:12px;color:var(--text2);margin-top:6px;">Google Workspaceと深く統合。推論力が前モデルの2倍以上に向上。</p></div>
+      <div class="card-sm"><strong style="font-size:13px;">Meta</strong><div style="font-size:10px;color:var(--text3);margin:3px 0 6px;">Llama 4</div><span class="tag t-mid">オープン・カスタマイズ</span><p style="font-size:12px;color:var(--text2);margin-top:6px;">オープンウェイトで自社環境に完全閉じた運用が可能。</p></div>
+    </div>
+    <div style="background:var(--amber-bg);border-radius:var(--rs);padding:12px 16px;font-size:12.5px;color:var(--amber);font-weight:700;">正しい問い：「最強のAIはどれか」ではなく「自分の仕事に最適なAIスタックは何か」</div>
+    <div class="quiz-wrap" id="q0"></div>
+  </div>
+</div>
+
+<!-- PART 2 -->
+<div id="part-1" style="display:none;">
+  <div class="part-divider"><div class="part-divider-inner"><p class="part-num">PART 2</p><p class="part-title">主要AI 6社 詳細比較</p><p class="part-sub">各AIの特徴・強み・具体的な活用方法</p></div></div>
+  <div class="section">
+
+    <p class="sec-label">01 / 06</p>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><p class="sec-title" style="margin:0;">OpenAI — ChatGPT</p><span class="tag t-teal">実務ワークフロー</span></div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.8;">OpenAIが開発する世界最大ユーザーを持つ汎用AI。GPT-5.4は推論・コーディング・エージェント機能を1モデルに統合。Thinkingモードで複雑な問いに深く思考し、Instantモードで即答する使い分けが可能。</p>
+    <div class="sw-grid">
+      <div class="sw-box ok"><div class="sw-label ok">強み</div><div class="sw-item">汎用性が最も高い（テキスト・画像・音声・コード）</div><div class="sw-item">GPTsでノーコードカスタムAI構築・公開が可能</div><div class="sw-item">プラグイン・API連携サービスが業界最多</div><div class="sw-item">Thinkingモードで難問・多段階推論に対応</div></div>
+      <div class="sw-box ng"><div class="sw-label ng">注意点・弱み</div><div class="sw-item">ハルシネーション（もっともらしい嘘）は根絶されていない</div><div class="sw-item">無料版は機能・回数に制限あり</div><div class="sw-item">Enterpriseプランでないと学習に使われる可能性</div></div>
+    </div>
+    <p style="font-size:12px;font-weight:700;color:var(--text);margin:1.25rem 0 .5rem;">具体的な活用方法</p>
+    <div class="uc-grid">
+      <div class="uc-card" style="border-top-color:#0f6e56;"><div class="uc-title">マーケティングコピー作成</div><div class="uc-body">「Aの商品、30代女性向け、SNS広告3パターン」で複数案を即生成。A/Bテスト用素材を大量生産。</div></div>
+      <div class="uc-card" style="border-top-color:#0f6e56;"><div class="uc-title">市場調査レポート自動化</div><div class="uc-body">大枠の指示だけでWebブラウジング・データ収集・分析・文書作成まで自律実行（GPT-5.4エージェント）。</div></div>
+      <div class="uc-card" style="border-top-color:#0f6e56;"><div class="uc-title">GPTsでカスタムAI構築</div><div class="uc-body">社内FAQボット・営業支援AI・採用面接評価AIを専門知識不要で構築。チームに展開できる。</div></div>
+      <div class="uc-card" style="border-top-color:#0f6e56;"><div class="uc-title">Excel / スプレッドシート分析</div><div class="uc-body">ChatGPT for Excelで自然言語でスプレッドシートを操作・分析・グラフ化。財務モデルも即作成。</div></div>
+    </div>
+    <div class="tip-box"><p><strong>TIPS：</strong>役割を明確に指示するとアウトプットが激変。「あなたは10年のキャリアを持つマーケターです。〇〇を前提に…」のように書き出す。</p></div>
+
+    <hr class="sec">
+    <p class="sec-label">02 / 06</p>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><p class="sec-title" style="margin:0;">Anthropic — Claude</p><span class="tag t-purple">コーディング・企業向け</span></div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.8;">Anthropicが開発する安全性重視のAI。100万トークンの超長文コンテキストを処理でき、フォーチュン・グローバル100の約8割が基幹業務に採用。コーディングベンチマーク（SWE-bench Verified）で業界最高水準の82%を達成。</p>
+    <div class="sw-grid">
+      <div class="sw-box ok"><div class="sw-label ok">強み</div><div class="sw-item">100万トークン対応。契約書・論文・コードベース全体を一括処理</div><div class="sw-item">コーディング性能が最高水準（SWE-bench 82%）</div><div class="sw-item">自然で読みやすい日本語。ライティング・要約に最適</div><div class="sw-item">Constitutional AIによる安全設計。企業コンプライアンスに対応</div></div>
+      <div class="sw-box ng"><div class="sw-label ng">注意点・弱み</div><div class="sw-item">画像生成は非対応（テキスト・コード特化）</div><div class="sw-item">GPTsのようなノーコードAI構築機能は限定的</div><div class="sw-item">無料版の利用制限はChatGPTより厳しめ</div></div>
+    </div>
+    <p style="font-size:12px;font-weight:700;color:var(--text);margin:1.25rem 0 .5rem;">具体的な活用方法</p>
+    <div class="uc-grid">
+      <div class="uc-card" style="border-top-color:#3c3489;"><div class="uc-title">長文書類の一括分析</div><div class="uc-body">100ページの契約書・報告書・論文をまるごと貼り付け、要点・リスク・アクション項目を一瞬で抽出。</div></div>
+      <div class="uc-card" style="border-top-color:#3c3489;"><div class="uc-title">自然な日本語ライティング</div><div class="uc-body">社外向け提案書・プレスリリース・メールを、AIっぽさのない読みやすい文章で仕上げる。</div></div>
+      <div class="uc-card" style="border-top-color:#3c3489;"><div class="uc-title">Claude Code：コード自律実行</div><div class="uc-body">「このバグを直してテストを書いて」と指示するだけ。GitHub公開コミットの4%はすでにClaude Codeが完了。</div></div>
+      <div class="uc-card" style="border-top-color:#3c3489;"><div class="uc-title">複雑な法務・財務レビュー</div><div class="uc-body">難解な規約・財務諸表・法的文書を正確に読み解き、専門外の担当者でも理解できる形で要約。</div></div>
+    </div>
+    <div class="tip-box"><p><strong>TIPS：</strong>Claudeは「丁寧に論理的に答えてほしい」タスクに強い。長文を渡すときは最初にゴールを明示する（例：「この文書を読んで、リスクを箇条書きで3点挙げてください」）。</p></div>
+
+    <hr class="sec">
+    <p class="sec-label">03 / 06</p>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><p class="sec-title" style="margin:0;">Google — Gemini</p><span class="tag t-blue">推論・Google連携</span></div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.8;">Googleが開発するマルチモーダルAI。Gemini 3.1 Proは推論力が前モデルの2倍以上に向上。Google WorkspaceやGmailを日常的に使う環境で圧倒的な生産性向上を実現。</p>
+    <div class="sw-grid">
+      <div class="sw-box ok"><div class="sw-label ok">強み</div><div class="sw-item">Gmail・スプレッドシート・ドライブのファイルを直接参照して作業</div><div class="sw-item">数百ページの書籍・資料も一度に処理。文脈理解力が高い</div><div class="sw-item">画像・動画・音声・テキストを統合的に理解</div><div class="sw-item">最新情報をリアルタイムで取得・統合して回答を生成</div></div>
+      <div class="sw-box ng"><div class="sw-label ng">注意点・弱み</div><div class="sw-item">Google製品を使っていないと強みが半減</div><div class="sw-item">コーディング特化タスクではClaudeに劣る場面も</div><div class="sw-item">データプライバシーはGoogleポリシーに準拠</div></div>
+    </div>
+    <p style="font-size:12px;font-weight:700;color:var(--text);margin:1.25rem 0 .5rem;">具体的な活用方法</p>
+    <div class="uc-grid">
+      <div class="uc-card" style="border-top-color:#1e2761;"><div class="uc-title">Googleドキュメント自動生成</div><div class="uc-body">「先週のミーティングメモを元に議事録を作って」とドライブのファイルを直接参照して生成。</div></div>
+      <div class="uc-card" style="border-top-color:#1e2761;"><div class="uc-title">Gmail返信の自動化</div><div class="uc-body">受信メールの文脈を理解して最適な返信文を生成。トーン・長さをワンクリックで調整。</div></div>
+      <div class="uc-card" style="border-top-color:#1e2761;"><div class="uc-title">会議録画→議事録変換</div><div class="uc-body">音声・映像・スライドを同時に解析し、発言者別・議題別の包括的な議事録を自動生成。</div></div>
+      <div class="uc-card" style="border-top-color:#1e2761;"><div class="uc-title">Webリサーチ→スプレッドシート</div><div class="uc-body">競合他社の価格・製品情報をWeb収集し、Googleスプレッドシートに自動整理・比較表を作成。</div></div>
+    </div>
+    <div class="tip-box"><p><strong>TIPS：</strong>Geminiの真価はGoogle Workspaceとの連携。「Gmailの〇〇さんからのメールを参照して…」「ドライブの〇〇ファイルを元に…」のようにファイル名・送信者名を直接指定できる。</p></div>
+
+    <hr class="sec">
+    <p class="sec-label">04 / 06</p>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><p class="sec-title" style="margin:0;">Meta — Llama 4</p><span class="tag t-mid">オープン・カスタマイズ</span></div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.8;">Metaが開発するオープンウェイトAI。自社サーバーやクラウドに独自デプロイが可能。データを外部に出せない業種（医療・法律・金融）での採用が増加中。2026年のAI設備投資は最大1,350億ドル。</p>
+    <div class="sw-grid">
+      <div class="sw-box ok"><div class="sw-label ok">強み</div><div class="sw-item">外部APIに依存せず、社内サーバーで完全運用。情報漏洩リスクゼロ</div><div class="sw-item">独自データでファインチューニングし、自社業務特化モデルを作れる</div><div class="sw-item">APIコストがかからず、大量処理でもコストが一定</div><div class="sw-item">エッジデバイスへの組み込みも可能（工場・車載等）</div></div>
+      <div class="sw-box ng"><div class="sw-label ng">注意点・弱み</div><div class="sw-item">セットアップに技術的なスキルが必要</div><div class="sw-item">UIは自前で用意する必要がある</div><div class="sw-item">モデル運用・更新の管理コストがかかる</div></div>
+    </div>
+    <p style="font-size:12px;font-weight:700;color:var(--text);margin:1.25rem 0 .5rem;">具体的な活用方法</p>
+    <div class="uc-grid">
+      <div class="uc-card" style="border-top-color:#4a6fa5;"><div class="uc-title">社内専用AIの構築</div><div class="uc-body">自社の製品マニュアル・社内規定・過去案件データで学習させ、外部に情報を出さない完全内製AIを構築。</div></div>
+      <div class="uc-card" style="border-top-color:#4a6fa5;"><div class="uc-title">機密データの処理</div><div class="uc-body">医療カルテ・法的文書・財務情報など、クラウドに上げられないデータをローカル環境で安全に分析。</div></div>
+      <div class="uc-card" style="border-top-color:#4a6fa5;"><div class="uc-title">大量バッチ処理</div><div class="uc-body">APIコストを気にせず、数万件の文書分類・翻訳・要約を夜間バッチで自動処理。コスト予測が立てやすい。</div></div>
+      <div class="uc-card" style="border-top-color:#4a6fa5;"><div class="uc-title">エッジデバイス組み込み</div><div class="uc-body">スマート工場の検査機器・店舗端末・車載システムに軽量版Llamaを組み込み、オフライン動作を実現。</div></div>
+    </div>
+    <div class="tip-box"><p><strong>TIPS：</strong>AWSのAmazon Bedrockを使えばサーバー管理不要でLlamaを使える近道も。「自社データを守りながらAIを活用したい」企業向けの最有力選択肢。</p></div>
+
+    <hr class="sec">
+    <p class="sec-label">05–06 / 06</p>
+    <p class="sec-title">xAI Grok / Microsoft Copilot</p>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:.5rem;"><strong style="font-size:14px;">xAI — Grok 4.20</strong><span class="tag t-coral">リアルタイム情報</span></div>
+        <p style="font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:.75rem;">X（旧Twitter）とリアルタイム連携。SNS投稿データを学習し、今この瞬間の世論・市場動向を把握するのが得意。</p>
+        <div class="sw-item" style="border:none;">▸ SNSのリアルタイムトレンド分析・バイラル予測</div>
+        <div class="sw-item" style="border:none;">▸ ニュース速報の即時要約と背景解説</div>
+        <div class="sw-item" style="border:none;">▸ X上の競合・業界の最新動向モニタリング</div>
+        <div class="sw-item" style="border:none;">▸ ソーシャルリスニングと感情分析</div>
+      </div>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:.5rem;"><strong style="font-size:14px;">Microsoft Copilot</strong><span class="tag t-navy">Office業務</span></div>
+        <p style="font-size:12.5px;color:var(--text2);line-height:1.7;margin-bottom:.75rem;">Word・Excel・PowerPoint・Outlook・Teamsに深く統合。M365を使う企業のIT部門から最も導入しやすい。</p>
+        <div class="sw-item" style="border:none;">▸ Outlookで受信メールの要約・返信文生成</div>
+        <div class="sw-item" style="border:none;">▸ WordでAIが文書の構造・内容を自動提案</div>
+        <div class="sw-item" style="border:none;">▸ Excelで自然言語によるデータ分析・グラフ化</div>
+        <div class="sw-item" style="border:none;">▸ PowerPointでスライドの自動生成・デザイン改善</div>
+      </div>
+    </div>
+
+    <hr class="sec">
+    <p class="sec-label" style="margin-top:1.5rem;">CHEAT SHEET</p>
+    <p class="sec-title">用途別 AI 選び方チートシート</p>
+    <div class="card">
+      <div class="cheat-row"><div class="cheat-task">文章作成・ライティング</div><div class="cheat-winner" style="background:var(--purple);">Claude</div><div class="cheat-reason">日本語の自然さ・論理的構成力が最高水準</div></div>
+      <div class="cheat-row"><div class="cheat-task">汎用・迷ったときの第一選択</div><div class="cheat-winner" style="background:var(--teal);">ChatGPT</div><div class="cheat-reason">機能・拡張性・ユーザー数すべてバランスよく高水準</div></div>
+      <div class="cheat-row"><div class="cheat-task">Google Workspaceと連携</div><div class="cheat-winner" style="background:var(--navy);">Gemini</div><div class="cheat-reason">Gmail・ドライブ・スプレッドシートと直接連携</div></div>
+      <div class="cheat-row"><div class="cheat-task">コーディング・開発支援</div><div class="cheat-winner" style="background:var(--purple);">Claude / ChatGPT</div><div class="cheat-reason">Claude Codeが自律実行。ChatGPTのCodexも高機能</div></div>
+      <div class="cheat-row"><div class="cheat-task">Office（Word・Excel）業務</div><div class="cheat-winner" style="background:var(--mid);">Copilot</div><div class="cheat-reason">M365に統合済み。スキル不要で即使える</div></div>
+      <div class="cheat-row"><div class="cheat-task">リアルタイム・SNS情報収集</div><div class="cheat-winner" style="background:var(--coral);">Grok / ChatGPT</div><div class="cheat-reason">GrokはX特化。ChatGPTはWeb検索統合で最新情報対応</div></div>
+      <div class="cheat-row"><div class="cheat-task">機密データ・社内専用AI</div><div class="cheat-winner" style="background:var(--mid);">Meta Llama</div><div class="cheat-reason">オープンウェイトで自社環境に完全閉じた運用が可能</div></div>
+      <div class="cheat-row"><div class="cheat-task">深い推論・難問解決</div><div class="cheat-winner" style="background:var(--teal);">ChatGPT Thinking</div><div class="cheat-reason">Test-time computeで難問を段階的に解く</div></div>
+    </div>
+    <div class="quiz-wrap" id="q1"></div>
+  </div>
+</div>
+
+<!-- PART 3 -->
+<div id="part-2" style="display:none;">
+  <div class="part-divider"><div class="part-divider-inner"><p class="part-num">PART 3</p><p class="part-title">業界別 活用事例</p><p class="part-sub">製造・医療・金融・教育・マーケティング・小売</p></div></div>
+  <div class="section">
+    <p class="sec-label">INDUSTRY USE CASES</p>
+    <p class="sec-title">業界別の具体的な活用シーン</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;">
+      <div class="ind-card mfg"><div class="ind-name">⚙ 製造業</div><div class="ind-item">設備異常の予知保全：センサーデータ+AI解析で故障を事前検知</div><div class="ind-item">設計書・マニュアルのナレッジ化：膨大な技術文書を即座に検索・回答</div><div class="ind-item">品質検査の自動化：画像AIで外観不良を0.1秒で検出</div><div class="ind-item">作業員向けAIアシスタント：現場タブレットで手順・トラブル対応を即提示</div></div>
+      <div class="ind-card med"><div class="ind-name">⚕ 医療・ヘルスケア</div><div class="ind-item">カルテの自動要約・サマリー生成で医師の業務負荷を削減</div><div class="ind-item">症状入力→鑑別診断の候補提示（最終判断は医師）</div><div class="ind-item">医学論文の最新エビデンスを瞬時に検索・要約</div><div class="ind-item">患者向けインフォームドコンセント文書の自動生成</div></div>
+      <div class="ind-card fin"><div class="ind-name">💹 金融・保険</div><div class="ind-item">契約書・約款の自動レビューでリスク条項を即時検出</div><div class="ind-item">投資レポートの自動生成：データ→分析文章を数秒で作成</div><div class="ind-item">AML（マネロン対策）：異常取引パターンをAIで検知・報告</div><div class="ind-item">顧客向けFAQボット：24時間対応で問い合わせ工数を大幅削減</div></div>
+      <div class="ind-card edu"><div class="ind-name">📚 教育・研修</div><div class="ind-item">個別最適化学習：生徒の理解度・進度に合わせた問題・解説を自動生成</div><div class="ind-item">社内研修コンテンツの自動生成：テキスト→クイズ→解説まで一括作成</div><div class="ind-item">記述問題の採点補助：採点基準を学習し、自動採点＋フィードバック</div><div class="ind-item">教材を複数言語に即時翻訳し、グローバル展開を支援</div></div>
+      <div class="ind-card mkt"><div class="ind-name">📣 マーケティング・広告</div><div class="ind-item">ターゲット別コピー大量生成：セグメント×トーン×媒体の組み合わせを一括生産</div><div class="ind-item">SEO記事・コンテンツの下書き自動化：キーワード設計から本文まで高速生成</div><div class="ind-item">SNS投稿スケジュール×文案の自動生成：1ヶ月分を数時間で量産</div><div class="ind-item">広告クリエイティブのA/Bテスト高速化：複数パターン生成→効果測定→改善</div></div>
+      <div class="ind-card ret"><div class="ind-name">🛍 小売・EC</div><div class="ind-item">商品説明文の大量自動生成：SKU数千点の文章を一括作成</div><div class="ind-item">レビュー分析：大量の顧客レビューからインサイト・改善点を瞬時に抽出</div><div class="ind-item">パーソナライズレコメンド：個人の購買履歴・好みに最適化した提案文を生成</div><div class="ind-item">カスタマーサポートの24時間自動化：FAQ・返品・注文確認を完全自動対応</div></div>
+    </div>
+    <div class="quiz-wrap" id="q2"></div>
+  </div>
+</div>
+
+<!-- PART 4 -->
+<div id="part-3" style="display:none;">
+  <div class="part-divider"><div class="part-divider-inner"><p class="part-num">PART 4</p><p class="part-title">AIエージェントの実態</p><p class="part-sub">「答える」から「やり遂げる」AIへ</p></div></div>
+  <div class="section">
+    <p class="sec-label">WHAT IS AN AGENT?</p>
+    <p class="sec-title">AIエージェント — 仕事を「やり遂げる」AI</p>
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.8;margin-bottom:1rem;">人間が指示を出すと、AIが検索・コード実行・ファイル操作・外部API呼び出しなどのツールを自分で選んで使い、<strong>目標を達成するまで自律的にループ</strong>します。単に「質問に答える」のではなく、仕事を「やり遂げる」のが本質。</p>
+    <div class="loop-steps">
+      <div class="loop-step">① 計画</div><div class="loop-arrow">→</div>
+      <div class="loop-step">② ツール実行</div><div class="loop-arrow">→</div>
+      <div class="loop-step">③ 観察</div><div class="loop-arrow">→</div>
+      <div class="loop-step">④ 再計画</div><div class="loop-arrow">↩ ループ</div>
+    </div>
+    <p style="font-size:12px;font-weight:700;color:var(--text);margin:1.25rem 0 .5rem;">代表的なエージェント事例</p>
+    <div class="infobox purple"><strong>Claude Code（Anthropic）：</strong>コードベース全体を読み込み、バグ修正・新機能実装・テスト作成までを自律実行。GitHub上の公開コミットの4%はすでにClaude Codeが完了しており、年末には20%超が予想されています。</div>
+    <div class="infobox teal"><strong>ChatGPT エージェント（OpenAI）：</strong>市場調査→データ収集→分析→レポート作成までをWebブラウジング＋コード実行で自律実行。大枠の指示だけで一連の作業を完遂。</div>
+    <div class="infobox"><strong>A2A（Agent to Agent）：</strong>複数のAIエージェントが連携して複雑なワークフローを分担処理する仕組み。2026年版のAI比較はこの連携対応が主な評価軸。</div>
+    <hr class="sec">
+    <p class="sec-label">MCP</p>
+    <p class="sec-title">MCP — AIと外部世界をつなぐ共通規格</p>
+    <div style="background:var(--navy);border-radius:var(--r);padding:1.5rem;color:#fff;">
+      <p style="font-size:14px;font-weight:700;color:var(--ice);margin-bottom:.75rem;">Model Context Protocol とは</p>
+      <p style="font-size:13px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:1rem;">AnthropicがオープンソースでリリースしたAI接続の共通規格。AIとデータベース・API・ファイルシステムを<strong style="color:var(--ice);">「USB-Cのような汎用コネクタ」</strong>で接続する標準インターフェース。現在、Google・Microsoft・AWSなど主要クラウドも採用し、エコシステムが急速に拡大中。</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;">
+        <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:10px;font-size:11.5px;color:rgba(255,255,255,.8);">✓ どのAIからも同じ方法でツール接続</div>
+        <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:10px;font-size:11.5px;color:rgba(255,255,255,.8);">✓ 一度作ったツールをどこでも再利用</div>
+        <div style="background:rgba(255,255,255,.1);border-radius:6px;padding:10px;font-size:11.5px;color:rgba(255,255,255,.8);">✓ 主要クラウドが標準採用</div>
+      </div>
+    </div>
+    <div class="quiz-wrap" id="q3"></div>
+  </div>
+</div>
+
+<!-- PART 5 -->
+<div id="part-4" style="display:none;">
+  <div class="part-divider"><div class="part-divider-inner"><p class="part-num">PART 5</p><p class="part-title">社会への影響と展望</p><p class="part-sub">雇用変化・規制・企業二極化の現実</p></div></div>
+  <div class="section">
+    <p class="sec-label">IMPACT</p>
+    <p class="sec-title">社会への影響 — プラスと課題</p>
+    <div class="impact-grid">
+      <div class="impact-box pos">
+        <div class="impact-label pos">✓ プラスの影響</div>
+        <div class="impact-item">業務効率化・コスト削減の加速（週5〜10時間の工数削減事例多数）</div>
+        <div class="impact-item">AIリテラシーを持つ人材の市場価値が急上昇</div>
+        <div class="impact-item">新産業・新職種の創出（プロンプトエンジニア・AI監査など）</div>
+        <div class="impact-item">医療診断精度の向上・創薬スピードの加速</div>
+        <div class="impact-item">教育の個別最適化でアクセス格差の縮小</div>
+      </div>
+      <div class="impact-box neg">
+        <div class="impact-label neg">! 向き合うべき課題</div>
+        <div class="impact-item">ルーティン業務の自動化による雇用変化（特にホワイトカラー）</div>
+        <div class="impact-item">ディープフェイク・フィッシング詐欺の高度化・大量化</div>
+        <div class="impact-item">著作権・プライバシー問題の法整備が追いついていない</div>
+        <div class="impact-item">シャドーAIによる機密情報漏洩リスク</div>
+        <div class="impact-item">EUなど各国のAI規制整備と対応コスト</div>
+      </div>
+    </div>
+    <div style="background:var(--navy);border-radius:var(--rs);padding:14px 16px;margin:1.25rem 0;text-align:center;">
+      <p style="font-size:12px;font-weight:700;color:#fff;">市場規模予測：2026年 833億ドル → 2035年 9,884億ドル（CAGR 31.6%）</p>
+      <p style="font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;">日本：2028年 8,028億円（IDC）/ 2030年 2,110億ドル（JEITA）</p>
+    </div>
+    <hr class="sec">
+    <p class="sec-label">SUMMARY</p>
+    <p class="sec-title">7つのキーポイント</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">1</div><p style="font-size:13px;color:var(--text);">企業のAI利用率54.7%。2026年は「ROIで評価される年」</p></div>
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">2</div><p style="font-size:13px;color:var(--text);">各AIは用途で棲み分け。「最強」より「最適なスタック選び」が重要</p></div>
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">3</div><p style="font-size:13px;color:var(--text);">Claude：長文・コーディング。ChatGPT：汎用。Gemini：Google連携</p></div>
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">4</div><p style="font-size:13px;color:var(--text);">Llama：機密データ・自社AI。Grok：リアルタイム。Copilot：Office</p></div>
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">5</div><p style="font-size:13px;color:var(--text);">製造・医療・金融・教育・マーケで具体的な成果が続々と出始めている</p></div>
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">6</div><p style="font-size:13px;color:var(--text);">AIエージェントが「答える」から「やり遂げる」AIへ進化。MCP規格が普及</p></div>
+      <div class="card-sm" style="display:flex;gap:12px;align-items:center;"><div style="background:var(--navy);color:#fff;font-weight:700;font-family:'DM Mono',monospace;font-size:13px;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">7</div><p style="font-size:13px;color:var(--text);">社会的恩恵と課題が並走。シャドーAI対策・規制対応が企業の急務</p></div>
+    </div>
+    <div class="quiz-wrap" id="q4"></div>
+  </div>
+</div>
+
+<div class="dl-banner">
+  <h2>スライド資料（全25枚）もどうぞ</h2>
+  <p>このページの内容をPowerPoint形式でダウンロードできます。チームへの共有・社内勉強会にご活用ください。</p>
+  <a class="dl-btn" href="genai_2026_full.pptx" download>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    スライド資料をダウンロード（.pptx / 25枚）
+  </a>
+</div>
+<footer class="site-footer">生成AI最新動向 2026 完全版 · Team Learning Content · Powered by Claude Pro</footer>
+
+<script>
+const quizzes = [
+  { pid:0, qid:'q0', q:'2026年における生成AI業界の最大の変化として正しいのはどれですか？', opts:['1社のAIが全用途で圧倒的に優勢になった','企業が「成果・ROI」を求め、各社が用途特化で競争する構図になった','AIの利用者数が減少に転じた','規制強化により新しいモデルが出なくなった'], ans:1, exp:'「最強AIはどれか」という問いは時代遅れになりつつあります。各社が強みの領域を絞り込み、企業も「どのAIを使うか」より「どう成果を出すか」にフォーカスしています。' },
+  { pid:1, qid:'q1', q:'「機密データを社外に出さずAIを活用したい」場合に最適なのはどれですか？', opts:['ChatGPT Enterprise','Google Gemini','Meta Llama（自社サーバーデプロイ）','Microsoft Copilot'], ans:2, exp:'Meta LlamaはオープンウェイトAIで、自社サーバーに完全デプロイできます。外部APIに一切データを送らないため、医療・法律・金融など機密性が高い業種での採用が増えています。' },
+  { pid:2, qid:'q2', q:'マーケティング部門がAIで最も効果を発揮しやすい活用はどれですか？', opts:['製造ラインの品質検査','ターゲット別コピーの大量生成とA/Bテスト高速化','医療カルテの要約','設備の予知保全'], ans:1, exp:'AIは指示さえ明確なら大量のコピーバリエーションを瞬時に生成できます。セグメント×トーン×媒体の掛け合わせで多数のパターンを作り、高速でA/Bテストを回せるのが大きな強みです。' },
+  { pid:3, qid:'q3', q:'MCPについて正しく説明しているのはどれですか？', opts:['Metaが開発した画像生成モデルの規格','AIとデータベース・APIを接続する共通インターフェース規格','AIの安全性を評価するベンチマーク','OpenAIが独占するクローズドな接続規格'], ans:1, exp:'MCP（Model Context Protocol）はAnthropicがオープンソースで公開したAI接続の共通規格です。USB-Cのようにどんなツールとも接続できる汎用コネクタとして、主要クラウド各社も採用しています。' },
+  { pid:4, qid:'q4', q:'2026年に「シャドーAI」対策が企業の急務となっている理由は？', opts:['AIが自動的に会社の資産を購入してしまうから','従業員が会社の把握なしにAIを使うことでセキュリティ・ガバナンスリスクが生じるから','AIが従業員の代わりに会議に出席するから','AIの使いすぎで電力消費が増えるから'], ans:1, exp:'社員が業務で非公式にAIツールを使う「シャドーAI」が増えており、機密情報の漏洩・利用規約違反・監査リスクが生じます。企業はAI利用のルール整備と実態把握が急務になっています。' },
+];
+
+const scores = {};
+
+function renderQuiz(q) {
+  const el = document.getElementById(q.qid);
+  if (!el) return;
+  const answered = scores[q.qid] !== undefined;
+  const chosen = scores[q.qid + '_c'];
+  el.innerHTML = `
+    <div class="quiz-label">理解度チェック</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="opts">${q.opts.map((o,i) => {
+      let cls = 'opt';
+      if (answered) { if (i===q.ans) cls+=' correct'; else if (chosen===i) cls+=' wrong'; }
+      return `<button class="${cls}" ${answered?'disabled':''} onclick="answerQ('${q.qid}',${i})">${o}</button>`;
+    }).join('')}</div>
+    ${answered ? `<div class="feedback ${scores[q.qid]?'ok':'ng'}"><strong>${scores[q.qid]?'✓ 正解！':'✗ 不正解。'}</strong> ${q.exp}</div>` : ''}`;
+  updateProg();
+}
+
+function answerQ(qid, i) {
+  const q = quizzes.find(x => x.qid === qid);
+  scores[qid] = (i === q.ans);
+  scores[qid + '_c'] = i;
+  renderQuiz(q);
+}
+
+function updateProg() {
+  const done = quizzes.filter(q => scores[q.qid] !== undefined).length;
+  const pct = Math.round(done / quizzes.length * 100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-label').textContent = `学習進捗 (${done}/${quizzes.length} 完了)`;
+}
+
+function showPart(idx, btn) {
+  for (let i = 0; i < 5; i++) document.getElementById('part-'+i).style.display = i===idx ? '' : 'none';
+  document.querySelectorAll('.part-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  const q = quizzes.find(x => x.pid===idx);
+  if (q) renderQuiz(q);
+  window.scrollTo({top: document.querySelector('.part-nav').offsetTop - 10, behavior:'smooth'});
+}
+
+quizzes.forEach(q => renderQuiz(q));
+</script>
+</body>
+</html>
