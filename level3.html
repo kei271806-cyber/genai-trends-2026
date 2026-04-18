@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lv.3 中級 研修プログラム — 生成AI最新動向 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#e0dcd4;
+  --text:#1a1814;--text2:#6b6760;--text3:#9e9b96;
+  --navy:#1e2761;--mid:#4a6fa5;--r:10px;--rs:6px;
+  --accent:#1a5fa8;--accent-bg:#e8f0fb;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
+
+/* Header */
+.page-header{background:var(--navy);color:#fff;padding:0;}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,.1);}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:14px;text-decoration:none;font-family:'Noto Sans JP',sans-serif;padding:6px 14px;border:1px solid rgba(255,255,255,.2);border-radius:20px;transition:all .15s;}
+.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+.site-label{font-size:12px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);}
+.header-hero{padding:3rem 2rem 3.5rem;max-width:860px;margin:0 auto;}
+.level-badge{display:inline-block;background:#e8f0fb;color:#1a5fa8;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;margin-bottom:1rem;}
+.score-range{font-size:12px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.5);margin-left:10px;}
+.page-title{font-size:clamp(24px,4vw,38px);font-weight:700;margin-bottom:.75rem;line-height:1.3;}
+.page-subtitle{font-size:16px;color:rgba(255,255,255,.65);line-height:1.8;max-width:600px;}
+
+/* Progress bar decoration */
+.header-bar{height:4px;background:#1a5fa8;}
+
+/* Main */
+.container{max-width:860px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+
+/* Section */
+.sec-eyebrow{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:.75rem;}
+.sec-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:1.5rem;}
+hr.sec{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:14px;margin-bottom:.5rem;}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;display:flex;gap:16px;align-items:flex-start;}
+.step-num{background:#1a5fa8;color:#fff;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.step-body{flex:1;}
+.step-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.step-title{font-size:16px;font-weight:700;color:var(--text);}
+.step-time{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:10px;}
+.step-desc{font-size:14px;color:var(--text2);line-height:1.8;}
+
+/* Checklist */
+.checklist{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;}
+.checklist-intro{font-size:14px;color:var(--text2);margin-bottom:1.25rem;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.check-item:last-child{border-bottom:none;}
+.check-item input{margin-top:3px;width:18px;height:18px;cursor:pointer;flex-shrink:0;accent-color:#1a5fa8;}
+.check-label{font-size:15px;color:var(--text2);line-height:1.65;cursor:pointer;}
+
+/* Resources */
+.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.resource-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s;}
+.resource-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.resource-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.resource-type{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;white-space:nowrap;}
+.resource-name{font-size:15px;font-weight:700;color:var(--text);}
+.resource-desc{font-size:13px;color:var(--text2);line-height:1.7;flex:1;}
+.resource-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#1a5fa8;text-decoration:none;padding:8px 16px;border:1.5px solid #1a5fa8;border-radius:var(--rs);transition:all .15s;align-self:flex-start;}
+.resource-link:hover{background:#e8f0fb;}
+.resource-link::after{content:'→';}
+
+/* CTA */
+.cta-box{background:var(--navy);border-radius:var(--r);padding:2rem;text-align:center;margin-top:3rem;}
+.cta-box h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:.5rem;}
+.cta-box p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:1.5rem;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:#e8f0fb;color:#1a5fa8;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;transition:opacity .15s;border:none;cursor:pointer;}
+.cta-btn:hover{opacity:.88;}
+
+footer{text-align:center;padding:1.5rem;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);}
+
+@media(max-width:600px){
+  .header-hero{padding:2rem 1rem 2.5rem;}
+  .container{padding:2rem 1rem 4rem;}
+  .step-card{flex-direction:column;gap:10px;}
+  .resource-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-top">
+    <a href="index.html" class="back-btn">← 学習コンテンツに戻る</a>
+    <span class="site-label">生成AI最新動向 2026</span>
+  </div>
+  <div class="header-hero">
+    <div>
+      <span class="level-badge">Lv.3 中級</span>
+      <span class="score-range">テストスコア：15〜18点</span>
+    </div>
+    <h1 class="page-title">AI実践者向け学習プログラム</h1>
+    <p class="page-subtitle">AIを「使う」から「作る・自動化する」へ。エージェントとシステム構築に踏み込みましょう</p>
+  </div>
+  <div class="header-bar"></div>
+</header>
+
+<main class="container">
+
+  <!-- Steps -->
+  <p class="sec-eyebrow">LEARNING STEPS</p>
+  <h2 class="sec-title">学習ステップ</h2>
+  <div class="steps">
+    
+    <div class="step-card">
+      <div class="step-num">Step 1</div>
+      <div class="step-body">
+        <div class="step-head">
+          <span class="step-title">AIエージェントを実際に動かす</span>
+          <span class="step-time">⏱ 3〜5時間</span>
+        </div>
+        <div class="step-desc">Claude CodeかChatGPTエージェントを使い、複数ステップの業務（調査→まとめ→資料化）を自律実行させてみる。「命令するだけで仕事が終わる」感覚を体験する。</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 2</div>
+      <div class="step-body">
+        <div class="step-head">
+          <span class="step-title">RAGシステムの基礎を理解する</span>
+          <span class="step-time">⏱ 3〜5時間</span>
+        </div>
+        <div class="step-desc">社内ドキュメントをAIに読ませて質問に答えさせるRAG（検索拡張生成）の仕組みを理解する。NotionAIやGoogle Workspace with Geminiで疑似体験できる。</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 3</div>
+      <div class="step-body">
+        <div class="step-head">
+          <span class="step-title">MCPを使ったツール連携を試す</span>
+          <span class="step-time">⏱ 3〜5時間</span>
+        </div>
+        <div class="step-desc">Claude Desktop＋MCPサーバーを設定して、AIからGoogleドライブやSlackに直接アクセスさせる。一度動かせば、エージェント時代の本質が理解できる。</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 4</div>
+      <div class="step-body">
+        <div class="step-head">
+          <span class="step-title">自社業務のAI自動化を設計する</span>
+          <span class="step-time">⏱ 5〜10時間</span>
+        </div>
+        <div class="step-desc">自部署の業務フローを書き出し、「どこをAIで自動化できるか」を設計する。Make（旧Integromat）やn8nでノーコードの自動化パイプラインを構築してみる。</div>
+      </div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">Step 5</div>
+      <div class="step-body">
+        <div class="step-head">
+          <span class="step-title">AI導入のROIを測定・報告する</span>
+          <span class="step-time">⏱ 継続的に</span>
+        </div>
+        <div class="step-desc">AI活用前後の所要時間を計測し、月間削減時間・コスト換算を算出する。この数字を上司・経営層に報告できれば、組織全体への展開につながる。</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sec">
+
+  <!-- Checklist -->
+  <p class="sec-eyebrow">ACHIEVEMENT CHECKLIST</p>
+  <h2 class="sec-title">達成チェックリスト</h2>
+  <div class="checklist">
+    <p class="checklist-intro">以下の項目をクリアできたら、次のレベルへ進む準備ができています。</p>
+    
+    <div class="check-item">
+      <input type="checkbox" id="c0">
+      <label class="check-label" for="c0">AIエージェントを使って複数ステップの業務を自律実行させた経験がある</label>
+    </div>
+    <div class="check-item">
+      <input type="checkbox" id="c1">
+      <label class="check-label" for="c1">RAGとは何かを同僚に説明できる</label>
+    </div>
+    <div class="check-item">
+      <input type="checkbox" id="c2">
+      <label class="check-label" for="c2">MCP（Model Context Protocol）を実際に設定したことがある</label>
+    </div>
+    <div class="check-item">
+      <input type="checkbox" id="c3">
+      <label class="check-label" for="c3">AI導入のROIを数値で算出・報告したことがある</label>
+    </div>
+    <div class="check-item">
+      <input type="checkbox" id="c4">
+      <label class="check-label" for="c4">ノーコードツールでAI自動化パイプラインを作ったことがある</label>
+    </div>
+  </div>
+
+  <hr class="sec">
+
+  <!-- Resources -->
+  <p class="sec-eyebrow">RECOMMENDED RESOURCES</p>
+  <h2 class="sec-title">おすすめリソース</h2>
+  <div class="resource-grid">
+    
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
+        <span class="resource-name">Model Context Protocol 公式ドキュメント</span>
+      </div>
+      <div class="resource-desc">MCPの仕様・サーバー実装・クライアント連携を公式で学ぶ。エージェント実装の必読資料。</div>
+      <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener" class="resource-link">ドキュメントを読む</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
+        <span class="resource-name">LangChain 公式ドキュメント</span>
+      </div>
+      <div class="resource-desc">AIエージェント・RAGシステム構築の定番フレームワーク。PythonかJSが読めれば始められる。</div>
+      <a href="https://python.langchain.com" target="_blank" rel="noopener" class="resource-link">ドキュメントを読む</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
+        <span class="resource-name">Claude Code 公式ガイド</span>
+      </div>
+      <div class="resource-desc">AnthropicのコーディングエージェントClaude Codeの使い方・設定・ベストプラクティス。</div>
+      <a href="https://docs.anthropic.com/ja/docs/claude-code" target="_blank" rel="noopener" class="resource-link">ガイドを読む</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
+        <span class="resource-name">n8n ドキュメント</span>
+      </div>
+      <div class="resource-desc">ノーコードでAI自動化パイプラインを構築できるオープンソースツール。MCP連携にも対応。</div>
+      <a href="https://docs.n8n.io" target="_blank" rel="noopener" class="resource-link">ドキュメントを読む</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#eeedfe;color:#3c3489;">有料</span>
+        <span class="resource-name">Coursera：Generative AI for Business Leaders</span>
+      </div>
+      <div class="resource-desc">ビジネスリーダー向けの生成AI活用・戦略コース。ROI設計・組織変革の視点も学べる。</div>
+      <a href="https://coursera.org" target="_blank" rel="noopener" class="resource-link">コースを見る</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#eeedfe;color:#3c3489;">有料</span>
+        <span class="resource-name">DeepLearning.AI：Building Systems with ChatGPT</span>
+      </div>
+      <div class="resource-desc">ChatGPT APIを使ったシステム設計・プロンプトチェーン・エージェント実装を体系的に学ぶ。</div>
+      <a href="https://learn.deeplearning.ai" target="_blank" rel="noopener" class="resource-link">コースを見る</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-top">
+        <span class="resource-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
+        <span class="resource-name">「AIエージェント設計パターン」</span>
+      </div>
+      <div class="resource-desc">複数エージェントの設計・A2A連携・ワークフロー自動化の実装パターンを体系的に解説。</div>
+      <a href="https://www.amazon.co.jp/s?k=AIエージェント+設計" target="_blank" rel="noopener" class="resource-link">Amazonで探す</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>もう一度テストに挑戦する</h3>
+    <p>知識を深めたら、理解度テストで再チャレンジしてみましょう。</p>
+    <a href="index.html" class="cta-btn">テストに挑戦する</a>
+  </div>
+
+</main>
+
+<footer>生成AI最新動向 2026 · Lv.3 中級 研修プログラム · Powered by Claude Pro</footer>
+
+</body>
+</html>
