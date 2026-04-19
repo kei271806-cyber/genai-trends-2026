@@ -183,7 +183,6 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
 .result-bar-track{height:10px;background:var(--border);border-radius:5px;}
 .result-bar-fill{height:100%;border-radius:5px;transition:width 1s cubic-bezier(.4,0,.2,1);}
 
-/* Training content */
 .training-section{max-width:960px;margin:0 auto;padding:0 1.5rem 4rem;}
 .training-header{font-size:22px;font-weight:700;color:var(--text);margin-bottom:1.5rem;padding-top:1rem;}
 .level-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.75rem;}
@@ -470,12 +469,7 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
   </div>
     </div>
 
-    <!-- Training content -->
-    <div class="training-section">
-      <p class="sec-label">RECOMMENDED TRAINING</p>
-      <h3 class="training-header" id="r-training-title"></h3>
-      <div id="training-content"></div>
-    </div>
+
 
     <!-- Survey -->
     <div class="training-section">
@@ -764,8 +758,6 @@ function showResult() {
 
   document.getElementById('quiz-section').style.display = 'none';
   document.getElementById('result-section').classList.add('visible');
-  document.getElementById('r-training-title').textContent = '';
-  document.getElementById('training-content').innerHTML = '';
   document.getElementById('r-score').textContent = score;
   document.getElementById('r-badge').textContent = level.label;
   const levelIdx = LEVELS.indexOf(level);
@@ -777,54 +769,6 @@ function showResult() {
   setTimeout(() => {
     document.getElementById('r-bar').style.cssText = `width:${Math.round(score/25*100)}%;background:${level.barColor};height:100%;border-radius:4px;transition:width 1s cubic-bezier(.4,0,.2,1);`;
   }, 100);
-
-  // Training content
-  document.getElementById('r-training-title').textContent = training.title;
-  document.getElementById('training-content').innerHTML = `
-    <p style="font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:2rem;padding:14px 18px;background:${training.bg};border-radius:var(--rs);">${training.subtitle}</p>
-
-    <!-- 学習ステップ -->
-    <p style="font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:1rem;">LEARNING STEPS</p>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:2.5rem;">
-      ${training.steps.map((s,i) => `
-        <div style="display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:16px;">
-          <div style="background:${training.color};color:#fff;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:2px;flex-shrink:0;">${s.num}</div>
-          <div style="flex:1;">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;">
-              <span style="font-size:15px;font-weight:700;color:var(--text);">${s.title}</span>
-              <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:10px;">⏱ ${s.time}</span>
-            </div>
-            <div style="font-size:14px;color:var(--text2);line-height:1.75;">${s.desc}</div>
-          </div>
-        </div>`).join('')}
-    </div>
-
-    <!-- 達成チェックリスト -->
-    <p style="font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:1rem;">ACHIEVEMENT CHECKLIST</p>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:1.25rem;margin-bottom:2.5rem;">
-      <p style="font-size:14px;color:var(--text2);margin-bottom:1rem;">以下の項目をクリアできたら、次のレベルへ進みましょう。</p>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        ${training.checks.map((c,i) => `
-          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:6px 0;border-bottom:1px solid var(--border);${i===training.checks.length-1?'border-bottom:none;':''}">
-            <input type="checkbox" style="margin-top:3px;width:16px;height:16px;cursor:pointer;flex-shrink:0;accent-color:${training.color};">
-            <span style="font-size:14px;color:var(--text2);line-height:1.6;">${c}</span>
-          </label>`).join('')}
-      </div>
-    </div>
-
-    <!-- おすすめリソース -->
-    <p style="font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:1rem;">RECOMMENDED RESOURCES</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
-      ${training.resources.map(r => `
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;background:${r.typeBg};color:${r.typeColor};white-space:nowrap;">${r.type}</span>
-            <span style="font-size:14px;font-weight:700;color:var(--text);">${r.name}</span>
-          </div>
-          <div style="font-size:13px;color:var(--text2);line-height:1.65;">${r.desc}</div>
-          ${r.url ? `<div style="font-size:12px;color:var(--mid);font-family:'DM Mono',monospace;">${r.url}</div>` : ''}
-        </div>`).join('')}
-    </div>`;
 
   window.scrollTo({top: 0, behavior:'smooth'});
 }
