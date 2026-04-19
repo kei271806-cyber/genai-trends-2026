@@ -764,6 +764,8 @@ function showResult() {
 
   document.getElementById('quiz-section').style.display = 'none';
   document.getElementById('result-section').classList.add('visible');
+  document.getElementById('r-training-title').textContent = '';
+  document.getElementById('training-content').innerHTML = '';
   document.getElementById('r-score').textContent = score;
   document.getElementById('r-badge').textContent = level.label;
   const levelIdx = LEVELS.indexOf(level);
