@@ -4,269 +4,420 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lv.2 基礎 研修プログラム — 生成AI最新動向 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#e0dcd4;
-  --text:#1a1814;--text2:#6b6760;--text3:#9e9b96;
-  --navy:#1e2761;--mid:#4a6fa5;--r:10px;--rs:6px;
-  --accent:#0f6e56;--accent-bg:#e1f5ee;
+  --bg:#f4f3ef;
+  --surface:#ffffff;
+  --surface2:#f0ede8;
+  --border:#e2ddd6;
+  --text:#18160f;
+  --text2:#635e55;
+  --text3:#9e9890;
+  --accent:#0a5c46;
+  --accent-light:#e8f8f2;
+  --accent-mid:#0f8060;
+  --r:12px;--rs:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
 
-/* Header */
-.page-header{background:var(--navy);color:#fff;padding:0;}
-.header-top{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,.1);}
-.back-btn{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:14px;text-decoration:none;font-family:'Noto Sans JP',sans-serif;padding:6px 14px;border:1px solid rgba(255,255,255,.2);border-radius:20px;transition:all .15s;}
-.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
-.site-label{font-size:12px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);}
-.header-hero{padding:3rem 2rem 3.5rem;max-width:860px;margin:0 auto;}
-.level-badge{display:inline-block;background:#e1f5ee;color:#0f6e56;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;margin-bottom:1rem;}
-.score-range{font-size:12px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.5);margin-left:10px;}
-.page-title{font-size:clamp(24px,4vw,38px);font-weight:700;margin-bottom:.75rem;line-height:1.3;}
-.page-subtitle{font-size:16px;color:rgba(255,255,255,.65);line-height:1.8;max-width:600px;}
+/* ── HEADER ── */
+.site-bar{background:var(--text);display:flex;align-items:center;justify-content:space-between;padding:.75rem 2rem;position:sticky;top:0;z-index:100;}
+.back-link{color:rgba(255,255,255,.65);font-size:13px;text-decoration:none;display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;letter-spacing:.04em;transition:color .15s;}
+.back-link:hover{color:#fff;}
+.site-name{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.35);}
 
-/* Progress bar decoration */
-.header-bar{height:4px;background:#0f6e56;}
+/* ── HERO ── */
+.hero{background:var(--accent);padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.06);}
+.hero::after{content:'';position:absolute;left:-60px;bottom:-100px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04);}
+.hero-inner{max-width:800px;margin:0 auto;position:relative;}
+.level-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);color:#fff;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:.08em;padding:5px 14px;border-radius:20px;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,.2);}
+.hero-title{font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:540px;line-height:1.8;margin-bottom:2rem;}
+.hero-score{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 16px;font-size:13px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.8);}
 
-/* Main */
-.container{max-width:860px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+/* Progress tracker */
+.progress-tracker{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 2rem;}
+.progress-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:16px;}
+.progress-label{font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);white-space:nowrap;}
+.progress-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1);width:0%;}
+.progress-pct{font-size:13px;font-family:'DM Mono',monospace;color:var(--accent);font-weight:500;min-width:36px;text-align:right;}
 
-/* Section */
-.sec-eyebrow{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:.75rem;}
-.sec-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:1.5rem;}
-hr.sec{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+/* ── MAIN ── */
+.main{max-width:800px;margin:0 auto;padding:3rem 1.5rem 5rem;}
 
-/* Steps */
-.steps{display:flex;flex-direction:column;gap:14px;margin-bottom:.5rem;}
-.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;display:flex;gap:16px;align-items:flex-start;}
-.step-num{background:#0f6e56;color:#fff;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.step-body{flex:1;}
-.step-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
-.step-title{font-size:16px;font-weight:700;color:var(--text);}
-.step-time{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:10px;}
+/* Section titles */
+.sec-eyebrow{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.14em;margin-bottom:.625rem;}
+.sec-title{font-size:24px;font-weight:700;color:var(--text);margin-bottom:.5rem;}
+.sec-sub{font-size:15px;color:var(--text2);margin-bottom:1.75rem;line-height:1.7;}
+.sec-divider{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:start;transition:box-shadow .2s;}
+.step-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);}
+.step-badge{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.step-num{background:var(--accent);color:#fff;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-time{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--surface2);padding:3px 8px;border-radius:10px;white-space:nowrap;text-align:center;}
+.step-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .step-desc{font-size:14px;color:var(--text2);line-height:1.8;}
 
-/* Checklist */
+/* ── MINI QUIZ ── */
+.quiz-intro{background:var(--accent-light);border-left:4px solid var(--accent);border-radius:0 var(--rs) var(--rs) 0;padding:14px 18px;margin-bottom:1.5rem;font-size:14px;color:var(--text2);line-height:1.7;}
+.mini-q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:12px;}
+.mini-q-num{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);letter-spacing:.1em;margin-bottom:.625rem;font-weight:500;}
+.mini-q-text{font-size:16px;font-weight:700;color:var(--text);margin-bottom:1.25rem;line-height:1.6;}
+.mini-q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;cursor:pointer;color:var(--text);background:var(--surface);text-align:left;font-family:'Noto Sans JP',sans-serif;line-height:1.55;transition:all .15s;}
+.q-opt:hover:not(:disabled){background:var(--accent-light);border-color:var(--accent);}
+.q-opt.correct{background:#e1f5ee;border-color:#5dcaa5;color:#085041;}
+.q-opt.wrong{background:#fcebeb;border-color:#f09595;color:#791f1f;}
+.mini-q-fb{margin-top:12px;padding:12px 16px;border-radius:var(--rs);font-size:14px;line-height:1.75;}
+.mini-q-fb.ok{background:#e1f5ee;color:#085041;}
+.mini-q-fb.ng{background:#fcebeb;color:#791f1f;}
+.quiz-score-banner{background:var(--accent);color:#fff;border-radius:var(--rs);padding:1rem 1.5rem;text-align:center;margin-top:1rem;font-size:15px;font-weight:700;display:none;}
+
+/* ── CHECKLIST ── */
 .checklist{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;}
-.checklist-intro{font-size:14px;color:var(--text2);margin-bottom:1.25rem;}
-.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.checklist-intro{font-size:14px;color:var(--text2);margin-bottom:1.25rem;line-height:1.7;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;}
 .check-item:last-child{border-bottom:none;}
-.check-item input{margin-top:3px;width:18px;height:18px;cursor:pointer;flex-shrink:0;accent-color:#0f6e56;}
-.check-label{font-size:15px;color:var(--text2);line-height:1.65;cursor:pointer;}
+.check-item input{display:none;}
+.check-mark{width:20px;height:20px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:var(--surface);}
+.check-item input:checked + .check-mark{background:var(--accent);border-color:var(--accent);}
+.check-item input:checked + .check-mark::after{content:'✓';color:#fff;font-size:12px;font-weight:700;}
+.check-text{font-size:15px;color:var(--text2);line-height:1.65;transition:color .2s;}
+.check-item input:checked ~ .check-text{color:var(--text3);text-decoration:line-through;}
 
-/* Resources */
-.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
-.resource-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s;}
-.resource-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08);}
-.resource-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.resource-type{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;white-space:nowrap;}
-.resource-name{font-size:15px;font-weight:700;color:var(--text);}
-.resource-desc{font-size:13px;color:var(--text2);line-height:1.7;flex:1;}
-.resource-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#0f6e56;text-decoration:none;padding:8px 16px;border:1.5px solid #0f6e56;border-radius:var(--rs);transition:all .15s;align-self:flex-start;}
-.resource-link:hover{background:#e1f5ee;}
-.resource-link::after{content:'→';}
+/* ── RESOURCES ── */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.res-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:all .2s;}
+.res-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);transform:translateY(-2px);border-color:var(--accent);}
+.res-top{display:flex;align-items:center;gap:8px;}
+.res-type{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;}
+.res-name{font-size:15px;font-weight:700;color:var(--text);}
+.res-desc{font-size:13px;color:var(--text2);line-height:1.7;flex:1;}
+.res-link{font-size:13px;font-weight:700;color:var(--accent);margin-top:4px;}
 
-/* CTA */
-.cta-box{background:var(--navy);border-radius:var(--r);padding:2rem;text-align:center;margin-top:3rem;}
-.cta-box h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:.5rem;}
-.cta-box p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:1.5rem;}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:#e1f5ee;color:#0f6e56;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;transition:opacity .15s;border:none;cursor:pointer;}
-.cta-btn:hover{opacity:.88;}
+/* ── CTA ── */
+.cta-section{background:var(--accent);border-radius:var(--r);padding:2.5rem 2rem;text-align:center;margin-top:3rem;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);}
+.cta-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:.5rem;}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.65);margin-bottom:1.5rem;}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--accent);font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;transition:opacity .15s;}
+.cta-btn-primary:hover{opacity:.9;}
+.cta-btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;font-weight:500;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;border:1.5px solid rgba(255,255,255,.4);transition:all .15s;}
+.cta-btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7);}
 
-footer{text-align:center;padding:1.5rem;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);}
+/* Footer */
+footer{text-align:center;padding:2rem 1.5rem;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);}
 
-@media(max-width:600px){
-  .header-hero{padding:2rem 1rem 2.5rem;}
-  .container{padding:2rem 1rem 4rem;}
-  .step-card{flex-direction:column;gap:10px;}
-  .resource-grid{grid-template-columns:1fr;}
+/* Animations */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.anim-1{animation:fadeSlideUp .5s ease both;}
+.anim-2{animation:fadeSlideUp .5s .1s ease both;}
+.anim-3{animation:fadeSlideUp .5s .2s ease both;}
+
+@media(max-width:640px){
+  .hero{padding:3rem 1rem 2.5rem;}
+  .main{padding:2rem 1rem 4rem;}
+  .step-card{grid-template-columns:1fr;}
+  .step-badge{flex-direction:row;}
+  .res-grid{grid-template-columns:1fr;}
+  .site-bar{padding:.75rem 1rem;}
+  .progress-tracker{padding:1rem;}
+  .cta-buttons{flex-direction:column;align-items:stretch;}
 }
 </style>
 </head>
 <body>
 
-<header class="page-header">
-  <div class="header-top">
-    <a href="index.html" class="back-btn">← 学習コンテンツに戻る</a>
-    <span class="site-label">生成AI最新動向 2026</span>
-  </div>
-  <div class="header-hero">
-    <div>
-      <span class="level-badge">Lv.2 基礎</span>
-      <span class="score-range">テストスコア：10〜14点</span>
+<div class="site-bar">
+  <a href="index.html" class="back-link">← 学習コンテンツに戻る</a>
+  <span class="site-name">生成AI最新動向 2026</span>
+</div>
+
+<section class="hero anim-1">
+  <div class="hero-inner">
+    <div class="level-chip">
+      <span>LEVEL 2</span>
+      <span style="opacity:.5;">|</span>
+      <span>Lv.2 基礎</span>
     </div>
-    <h1 class="page-title">AI基礎理解者向け学習プログラム</h1>
-    <p class="page-subtitle">AIを「知っている」から「使いこなせる」へ。用途別の使い分けを習得しましょう</p>
+    <h1 class="hero-title">AI基礎理解者<br>学習プログラム</h1>
+    <p class="hero-sub">AIを「知っている」から「使いこなせる」へ。用途別の使い分けを習得しましょう</p>
+    <div class="hero-score">テストスコア：10〜14点</div>
   </div>
-  <div class="header-bar"></div>
-</header>
+</section>
 
-<main class="container">
+<div class="progress-tracker">
+  <div class="progress-inner">
+    <span class="progress-label">チェックリスト達成度</span>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+    <span class="progress-pct" id="prog-pct">0%</span>
+  </div>
+</div>
 
-  <!-- Steps -->
-  <p class="sec-eyebrow">LEARNING STEPS</p>
-  <h2 class="sec-title">学習ステップ</h2>
-  <div class="steps">
+<main class="main">
+
+  <!-- STEPS -->
+  <section class="anim-2">
+    <p class="sec-eyebrow">LEARNING STEPS</p>
+    <h2 class="sec-title">学習ステップ</h2>
+    <p class="sec-sub">このレベルの方が優先的に取り組むべき5つのステップです。順番通りに進めることをおすすめします。</p>
+    <div class="steps">
+      
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">01</span>
+            <span class="step-time">3〜5時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">プロンプトエンジニアリングを習得する</h3>
+            <p class="step-desc">役割設定（「あなたは〇〇のプロです」）・具体的な制約指定・出力フォーマット指示・Few-shot（例示）の4技法をマスターしましょう。これだけでアウトプット品質が劇的に変わります。同じ質問でも書き方次第で天と地の差が出ます。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">02</span>
+            <span class="step-time">2〜3時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">ChatGPT・Claude・Geminiを使い分ける</h3>
+            <p class="step-desc">同じタスクを3つのAIに投げて出力を比較してみましょう。文章作成はClaude、調査はChatGPT、Google系業務はGeminiという感覚を体で覚えることが大切です。「どれが最強か」ではなく「何に使うか」が重要な視点です。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">03</span>
+            <span class="step-time">2〜3時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">GPTsでカスタムAIを作ってみる</h3>
+            <p class="step-desc">ChatGPT PlusのGPTs機能で自分専用のAIを構築してみましょう。「週報作成AI」「メール返信AI」など業務特化のボットを1つ作ると、AIが「ツール」から「仕事の相棒」に変わる感覚を得られます。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">04</span>
+            <span class="step-time">継続的に</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">自分の業務をAIで実際に効率化する</h3>
+            <p class="step-desc">週1回、今まで手作業でやっていた業務をAIで試みましょう。失敗してもOKです。「AIでできること・できないこと」の感覚を積み上げることが、真の実践力につながります。小さな成功体験を積み重ねましょう。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">05</span>
+            <span class="step-time">3〜5時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">AI活用事例を業界別に研究する</h3>
+            <p class="step-desc">自分の業種に近い活用事例を10個以上調べてみましょう。「なぜうまくいったか」「どんなプロンプトを使ったか」まで深掘りすることが重要です。他者の成功事例から学ぶことが、最速の上達法です。</p>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider">
+
+  <!-- MINI QUIZ -->
+  <section class="anim-3">
+    <p class="sec-eyebrow">MINI QUIZ</p>
+    <h2 class="sec-title">理解確認クイズ</h2>
+    <div class="quiz-intro">このレベルのポイントを3問でチェックします。学習ステップを読んでから挑戦してみましょう。</div>
     
-    <div class="step-card">
-      <div class="step-num">Step 1</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">プロンプトエンジニアリングを習得する</span>
-          <span class="step-time">⏱ 3〜5時間</span>
+        <div class="mini-q-card" id="mq_0">
+          <div class="mini-q-num">Q1</div>
+          <p class="mini-q-text">プロンプトエンジニアリングの「役割設定」とはどういう技法ですか？</p>
+          <div class="mini-q-opts"><button class="q-opt" onclick="answerMini(0,0)" id="qo_0_0">AIに特定の役職のように振る舞わせる指示を冒頭に書く</button>
+<button class="q-opt" onclick="answerMini(0,1)" id="qo_0_1">AIの学習データを設定し直す</button>
+<button class="q-opt" onclick="answerMini(0,2)" id="qo_0_2">プロンプトを英語で書くこと</button>
+<button class="q-opt" onclick="answerMini(0,3)" id="qo_0_3">AIに画像を認識させること</button>
+</div>
+          <div class="mini-q-fb" id="fb_0" style="display:none;"></div>
         </div>
-        <div class="step-desc">役割設定・具体的な制約指定・出力フォーマット指示・Few-shot（例示）の4技法をマスターする。アウトプット品質が劇的に変わる。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 2</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">ChatGPT・Claude・Geminiを使い分ける</span>
-          <span class="step-time">⏱ 2〜3時間</span>
+        <div class="mini-q-card" id="mq_1">
+          <div class="mini-q-num">Q2</div>
+          <p class="mini-q-text">GPTs（ChatGPTのカスタムAI機能）の最大のメリットはどれですか？</p>
+          <div class="mini-q-opts"><button class="q-opt" onclick="answerMini(1,0)" id="qo_1_0">無料で無制限に使える</button>
+<button class="q-opt" onclick="answerMini(1,1)" id="qo_1_1">ノーコードで業務特化の専用AIを作れる</button>
+<button class="q-opt" onclick="answerMini(1,2)" id="qo_1_2">GPT-5より高性能になる</button>
+<button class="q-opt" onclick="answerMini(1,3)" id="qo_1_3">他社AIより精度が高くなる</button>
+</div>
+          <div class="mini-q-fb" id="fb_1" style="display:none;"></div>
         </div>
-        <div class="step-desc">同じタスクを3つのAIに投げて出力を比較する。文章作成はClaude、調査はChatGPT、Google系業務はGeminiという感覚を体で覚える。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 3</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">GPTsでカスタムAIを作ってみる</span>
-          <span class="step-time">⏱ 2〜3時間</span>
+        <div class="mini-q-card" id="mq_2">
+          <div class="mini-q-num">Q3</div>
+          <p class="mini-q-text">同じ目的でChatGPTよりClaudeが優れている場面はどれですか？</p>
+          <div class="mini-q-opts"><button class="q-opt" onclick="answerMini(2,0)" id="qo_2_0">リアルタイムのニュース検索</button>
+<button class="q-opt" onclick="answerMini(2,1)" id="qo_2_1">自然で読みやすい日本語での長文作成・要約</button>
+<button class="q-opt" onclick="answerMini(2,2)" id="qo_2_2">Excelとの連携</button>
+<button class="q-opt" onclick="answerMini(2,3)" id="qo_2_3">Xのトレンド分析</button>
+</div>
+          <div class="mini-q-fb" id="fb_2" style="display:none;"></div>
         </div>
-        <div class="step-desc">ChatGPT PlusのGPTs機能で自分専用のAIを構築。「週報作成AI」「メール返信AI」など業務特化のボットを1つ作ると実感が湧く。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 4</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">自分の業務をAIで実際に効率化する</span>
-          <span class="step-time">⏱ 継続的に</span>
-        </div>
-        <div class="step-desc">週1回、今まで手作業でやっていた業務をAIで試みる。失敗してもOK。「AIでできること・できないこと」の感覚を積み上げるのが目的。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 5</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">AI活用事例を業界別に研究する</span>
-          <span class="step-time">⏱ 3〜5時間</span>
-        </div>
-        <div class="step-desc">自分の業種に近い活用事例を10個以上調べる。「なぜうまくいったか」「どんなプロンプトを使ったか」まで深掘りする。</div>
-      </div>
-    </div>
-  </div>
+    <div class="quiz-score-banner" id="quiz-banner"></div>
+  </section>
 
-  <hr class="sec">
+  <hr class="sec-divider">
 
-  <!-- Checklist -->
-  <p class="sec-eyebrow">ACHIEVEMENT CHECKLIST</p>
-  <h2 class="sec-title">達成チェックリスト</h2>
-  <div class="checklist">
-    <p class="checklist-intro">以下の項目をクリアできたら、次のレベルへ進む準備ができています。</p>
-    
-    <div class="check-item">
-      <input type="checkbox" id="c0">
-      <label class="check-label" for="c0">役割設定・Few-shotを使ったプロンプトを書けるようになった</label>
+  <!-- CHECKLIST -->
+  <section>
+    <p class="sec-eyebrow">ACHIEVEMENT CHECKLIST</p>
+    <h2 class="sec-title">達成チェックリスト</h2>
+    <p class="sec-sub">以下の項目をクリアできたら、次のレベルへ進む準備ができています。チェックを入れると進捗が更新されます。</p>
+    <div class="checklist">
+      <p class="checklist-intro">✅ できたものにチェックを入れていきましょう。全部チェックできたら次のレベルへ！</p>
+      
+          <label class="check-item" for="ck_0">
+            <input type="checkbox" id="ck_0" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">役割設定・Few-shotを使ったプロンプトを書けるようになった</span>
+          </label>
+          <label class="check-item" for="ck_1">
+            <input type="checkbox" id="ck_1" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">ChatGPT・Claude・Geminiをそれぞれ実際に使ったことがある</span>
+          </label>
+          <label class="check-item" for="ck_2">
+            <input type="checkbox" id="ck_2" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">自分の業務でAIを使って時間を削減できた経験がある</span>
+          </label>
+          <label class="check-item" for="ck_3">
+            <input type="checkbox" id="ck_3" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">GPTsでカスタムAIを1つ作ったことがある</span>
+          </label>
+          <label class="check-item" for="ck_4">
+            <input type="checkbox" id="ck_4" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">AI活用の成果を同僚に共有したことがある</span>
+          </label>
     </div>
-    <div class="check-item">
-      <input type="checkbox" id="c1">
-      <label class="check-label" for="c1">ChatGPT・Claude・Geminiをそれぞれ実際に使ったことがある</label>
-    </div>
-    <div class="check-item">
-      <input type="checkbox" id="c2">
-      <label class="check-label" for="c2">自分の業務でAIを使って時間を削減できた経験がある</label>
-    </div>
-    <div class="check-item">
-      <input type="checkbox" id="c3">
-      <label class="check-label" for="c3">GPTsでカスタムAIを1つ作ったことがある</label>
-    </div>
-    <div class="check-item">
-      <input type="checkbox" id="c4">
-      <label class="check-label" for="c4">AI活用の成果を同僚に共有したことがある</label>
-    </div>
-  </div>
+  </section>
 
-  <hr class="sec">
+  <hr class="sec-divider">
 
-  <!-- Resources -->
-  <p class="sec-eyebrow">RECOMMENDED RESOURCES</p>
-  <h2 class="sec-title">おすすめリソース</h2>
-  <div class="resource-grid">
-    
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">Anthropic Prompt Library</span>
-      </div>
-      <div class="resource-desc">業務別のプロンプトテンプレートが多数収録。そのままコピーして使えるものが多い。</div>
-      <a href="https://anthropic.com/prompt-library" target="_blank" rel="noopener" class="resource-link">ライブラリを見る</a>
+  <!-- RESOURCES -->
+  <section>
+    <p class="sec-eyebrow">RECOMMENDED RESOURCES</p>
+    <h2 class="sec-title">おすすめリソース</h2>
+    <p class="sec-sub">このレベルに最適なリソースを厳選しました。クリックして外部サイトで確認できます。</p>
+    <div class="res-grid">
+      
+        <a href="https://anthropic.com/prompt-library" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">Anthropic Prompt Library</div>
+          <div class="res-desc">業務別のプロンプトテンプレートが多数収録。そのままコピーして使えるものが多く実践的。</div>
+          <div class="res-link">ライブラリを見る →</div>
+        </a>
+        <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">OpenAI プロンプトエンジニアリングガイド</div>
+          <div class="res-desc">ChatGPTを最大限活用するための公式テクニック集。Few-shot・CoTの基礎まで解説。</div>
+          <div class="res-link">ガイドを読む →</div>
+        </a>
+        <a href="https://workspace.google.com/intl/ja/products/gemini" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">Gemini for Google Workspace</div>
+          <div class="res-desc">Gmail・スプレッドシート・ドキュメントでのGemini活用方法を公式が解説。</div>
+          <div class="res-link">公式ガイドを見る →</div>
+        </a>
+        <a href="https://learn.deeplearning.ai" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">DeepLearning.AI：Prompt Engineering</div>
+          <div class="res-desc">Andrew Ng監修のプロンプトエンジニアリング入門コース。英語だが内容が濃く実践的。</div>
+          <div class="res-link">コースを見る →</div>
+        </a>
+        <a href="https://udemy.com" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#eeedfe;color:#3c3489;">有料</span>
+          </div>
+          <div class="res-name">Udemy：ChatGPT＆Claude完全活用マスター講座</div>
+          <div class="res-desc">実務でのAI活用を体系的に学べるオンラインコース。セール時は1,500円程度で受講可能。</div>
+          <div class="res-link">Udemyで探す →</div>
+        </a>
+        <a href="https://www.amazon.co.jp/s?k=プロンプトエンジニアリング+実践" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
+          </div>
+          <div class="res-name">「プロンプトエンジニアリング実践ガイド」</div>
+          <div class="res-desc">業務別の効果的なプロンプト設計手法を解説。実例が豊富ですぐ実践に移せる一冊。</div>
+          <div class="res-link">Amazonで探す →</div>
+        </a>
     </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">OpenAI プロンプトエンジニアリングガイド</span>
-      </div>
-      <div class="resource-desc">ChatGPTを最大限活用するための公式テクニック集。Few-shot・CoT・RAGの基礎まで解説。</div>
-      <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener" class="resource-link">ガイドを読む</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">Gemini for Google Workspace</span>
-      </div>
-      <div class="resource-desc">Gmail・スプレッドシート・ドキュメントでのGemini活用方法を公式が解説。</div>
-      <a href="https://workspace.google.com/intl/ja/products/gemini" target="_blank" rel="noopener" class="resource-link">公式ガイドを見る</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#eeedfe;color:#3c3489;">有料</span>
-        <span class="resource-name">Udemy：ChatGPT＆Claude完全活用マスター講座</span>
-      </div>
-      <div class="resource-desc">実務でのAI活用を体系的に学べるオンラインコース。セール時は1,500円程度。</div>
-      <a href="https://udemy.com" target="_blank" rel="noopener" class="resource-link">Udemyで探す</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">DeepLearning.AI：ChatGPT Prompt Engineering</span>
-      </div>
-      <div class="resource-desc">Andrew Ng監修。プロンプトエンジニアリングの基礎から応用を英語で体系的に学べる短期コース。</div>
-      <a href="https://learn.deeplearning.ai" target="_blank" rel="noopener" class="resource-link">コースを見る</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
-        <span class="resource-name">「プロンプトエンジニアリング実践ガイド」</span>
-      </div>
-      <div class="resource-desc">業務別の効果的なプロンプト設計手法を解説。実例が豊富で読むだけでなくすぐ試せる。</div>
-      <a href="https://www.amazon.co.jp/s?k=プロンプトエンジニアリング" target="_blank" rel="noopener" class="resource-link">Amazonで探す</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
-        <span class="resource-name">「最強のAI活用仕事術」</span>
-      </div>
-      <div class="resource-desc">ChatGPT・Claude・Geminiを場面別に使い分ける実践書。ビジネスパーソン向けに最適。</div>
-      <a href="https://www.amazon.co.jp/s?k=AI+活用+仕事術" target="_blank" rel="noopener" class="resource-link">Amazonで探す</a>
-    </div>
-  </div>
+  </section>
 
   <!-- CTA -->
-  <div class="cta-box">
-    <h3>もう一度テストに挑戦する</h3>
-    <p>知識を深めたら、理解度テストで再チャレンジしてみましょう。</p>
-    <a href="index.html" class="cta-btn">テストに挑戦する</a>
+  <div class="cta-section">
+    <h3 class="cta-title">次のステップへ進みましょう</h3>
+    <p class="cta-sub">学習を続けて、さらに上のレベルを目指しましょう</p>
+    <div class="cta-buttons">
+      <a href="level3.html" class="cta-btn-primary">Lv.3 中級へ →</a>
+      <a href="index.html" class="cta-btn-secondary">テストに再挑戦する</a>
+    </div>
   </div>
 
 </main>
 
 <footer>生成AI最新動向 2026 · Lv.2 基礎 研修プログラム · Powered by Claude Pro</footer>
 
+<script>
+const QUIZ_DATA = [{"ans": 0, "exp": "役割設定とは「あなたは10年経験のマーケターです」「あなたは法律専門家として答えてください」のように、AIに特定の専門家・立場として振る舞うよう指示する技法です。これだけで回答の視点・語彙・深さが大きく変わります。"}, {"ans": 1, "exp": "GPTsはプログラミング不要で、自社業務に特化したカスタムAIを構築・公開できる機能です。社内FAQ・メール返信・週報作成など、繰り返し行う業務をAIに覚えさせることができます。"}, {"ans": 1, "exp": "Claudeは自然で読みやすい日本語の生成・長文の読解と要約において定評があります。社外向けの提案書・プレスリリース・メール文章など、日本語ライティングの品質が求められる場面での評価が高いです。"}];
+const answered = {};
+let quizCorrect = 0;
+
+function answerMini(qi, oi) {
+  if (answered[qi] !== undefined) return;
+  answered[qi] = oi;
+  const correct = QUIZ_DATA[qi].ans;
+  const exp = QUIZ_DATA[qi].exp;
+
+  for (let i = 0; i < 4; i++) {
+    const btn = document.getElementById(`qo_${qi}_${i}`);
+    if (!btn) continue;
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct');
+    else if (i === oi) btn.classList.add('wrong');
+  }
+
+  const fb = document.getElementById(`fb_${qi}`);
+  const isOk = oi === correct;
+  if (isOk) quizCorrect++;
+  fb.className = `mini-q-fb ${isOk ? 'ok' : 'ng'}`;
+  fb.innerHTML = `<strong>${isOk ? '✓ 正解！' : '✗ 不正解。'}</strong> ${exp}`;
+  fb.style.display = '';
+
+  if (Object.keys(answered).length === QUIZ_DATA.length) {
+    const banner = document.getElementById('quiz-banner');
+    banner.textContent = `クイズ結果：${quizCorrect} / ${QUIZ_DATA.length} 正解${quizCorrect === QUIZ_DATA.length ? ' 🎉 全問正解！' : ''}`;
+    banner.style.display = '';
+  }
+}
+
+function updateProgress() {
+  const checks = document.querySelectorAll('.check-item input');
+  const done = [...checks].filter(c => c.checked).length;
+  const pct = Math.round(done / checks.length * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+</script>
 </body>
 </html>

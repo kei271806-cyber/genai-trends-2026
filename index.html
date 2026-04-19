@@ -239,12 +239,12 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
 <!-- ── Part nav ── -->
 <nav class="part-nav">
   <div class="part-nav-inner">
-    <button class="part-tab active" onclick="showPart(0,this)">PART 1 業界動向</button>
-    <button class="part-tab" onclick="showPart(1,this)">PART 2 AI比較</button>
-    <button class="part-tab" onclick="showPart(2,this)">PART 3 業界事例</button>
-    <button class="part-tab" onclick="showPart(3,this)">PART 4 エージェント</button>
-    <button class="part-tab" onclick="showPart(4,this)">PART 5 社会影響</button>
-    <button class="part-tab quiz-tab" onclick="showPart(5,this)">📝 理解度テスト 25問</button>
+    <button class="part-tab active" data-part="0">PART 1 業界動向</button>
+    <button class="part-tab" data-part="1">PART 2 AI比較</button>
+    <button class="part-tab" data-part="2">PART 3 業界事例</button>
+    <button class="part-tab" data-part="3">PART 4 エージェント</button>
+    <button class="part-tab" data-part="4">PART 5 社会影響</button>
+    <button class="part-tab quiz-tab" data-part="5">📝 理解度テスト 25問</button>
   </div>
 </nav>
 
@@ -273,6 +273,10 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
       <div class="card-sm"><strong style="font-size:15px;">Meta</strong><div style="font-size:15px;color:var(--text3);margin:3px 0 6px;">Llama 4</div><span class="tag t-mid">オープン・カスタマイズ</span><p style="font-size:14px;color:var(--text2);margin-top:6px;">オープンウェイトで自社環境に完全閉じた運用が可能。</p></div>
     </div>
     <div style="background:var(--amber-bg);border-radius:var(--rs);padding:12px 16px;font-size:14px;color:var(--amber);font-weight:700;">正しい問い：「最強のAIはどれか」ではなく「自分の仕事に最適なAIスタックは何か」</div>
+
+    <div style="text-align:right;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <button data-part="1" class="part-tab-jump" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 24px;border-radius:var(--rs);border:none;cursor:pointer;">PART 2 AI比較へ →</button>
+    </div>
   </div>
 </div>
 
@@ -356,6 +360,10 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
       <div class="cheat-row"><div class="cheat-task">機密データ・社内専用AI</div><div class="cheat-winner" style="background:var(--mid);">Meta Llama</div><div class="cheat-reason">オープンウェイトで自社環境に完全閉じた運用が可能</div></div>
       <div class="cheat-row"><div class="cheat-task">深い推論・難問解決</div><div class="cheat-winner" style="background:var(--teal);">ChatGPT Thinking</div><div class="cheat-reason">Test-time computeで難問を段階的に解く</div></div>
     </div>
+
+    <div style="text-align:right;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <button data-part="2" class="part-tab-jump" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 24px;border-radius:var(--rs);border:none;cursor:pointer;">PART 3 業界事例へ →</button>
+    </div>
   </div>
 </div>
 
@@ -372,6 +380,10 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
       <div class="ind-card edu"><div class="ind-name">📚 教育・研修</div><div class="ind-item">個別最適化学習：生徒の理解度・進度に合わせた問題・解説を自動生成</div><div class="ind-item">社内研修コンテンツの自動生成：テキスト→クイズ→解説まで一括作成</div><div class="ind-item">記述問題の採点補助：採点基準を学習し、自動採点＋フィードバック</div><div class="ind-item">教材を複数言語に即時翻訳し、グローバル展開を支援</div></div>
       <div class="ind-card mkt"><div class="ind-name">📣 マーケティング・広告</div><div class="ind-item">ターゲット別コピー大量生成：セグメント×トーン×媒体の組み合わせを一括生産</div><div class="ind-item">SEO記事・コンテンツの下書き自動化：キーワード設計から本文まで高速生成</div><div class="ind-item">SNS投稿スケジュール×文案の自動生成：1ヶ月分を数時間で量産</div><div class="ind-item">広告クリエイティブのA/Bテスト高速化：複数パターン生成→効果測定→改善</div></div>
       <div class="ind-card ret"><div class="ind-name">🛍 小売・EC</div><div class="ind-item">商品説明文の大量自動生成：SKU数千点の文章を一括作成</div><div class="ind-item">レビュー分析：大量の顧客レビューからインサイト・改善点を瞬時に抽出</div><div class="ind-item">パーソナライズレコメンド：個人の購買履歴・好みに最適化した提案文を生成</div><div class="ind-item">カスタマーサポートの24時間自動化：FAQ・返品・注文確認を完全自動対応</div></div>
+    </div>
+
+    <div style="text-align:right;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <button data-part="3" class="part-tab-jump" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 24px;border-radius:var(--rs);border:none;cursor:pointer;">PART 4 エージェントへ →</button>
     </div>
   </div>
 </div>
@@ -398,6 +410,10 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
       <p style="font-size:14px;font-weight:700;color:var(--ice);margin-bottom:.75rem;">Model Context Protocol とは</p>
       <p style="font-size:15px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:1rem;">AnthropicがオープンソースでリリースしたAI接続の共通規格。AIとデータベース・API・ファイルシステムを<strong style="color:var(--ice);">「USB-Cのような汎用コネクタ」</strong>で接続する標準インターフェース。Google・Microsoft・AWSなど主要クラウドも採用し、エコシステムが急速に拡大中。</p>
     </div>
+
+    <div style="text-align:right;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+      <button data-part="4" class="part-tab-jump" style="display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 24px;border-radius:var(--rs);border:none;cursor:pointer;">PART 5 社会影響へ →</button>
+    </div>
   </div>
 </div>
 
@@ -414,7 +430,7 @@ hr.sec{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
     <div style="background:var(--navy);border-radius:var(--rs);padding:14px 16px;margin:1.25rem 0;text-align:center;"><p style="font-size:14px;font-weight:700;color:#fff;">市場規模予測：2026年 833億ドル → 2035年 9,884億ドル（CAGR 31.6%）</p><p style="font-size:15px;color:rgba(255,255,255,.55);margin-top:4px;">日本：2028年 8,028億円（IDC）/ 2030年 2,110億ドル（JEITA）</p></div>
     <div style="background:var(--amber-bg);border-radius:var(--rs);padding:14px 16px;text-align:center;font-size:15px;font-weight:700;color:var(--amber);">全5パートを読み終えたら、理解度テストに挑戦してみましょう！</div>
     <div style="text-align:center;margin-top:1.25rem;">
-      <button onclick="showPart(5, document.querySelector('.quiz-tab'))" style="background:var(--navy);color:#fff;font-weight:700;font-size:14px;font-family:'Noto Sans JP',sans-serif;padding:13px 32px;border-radius:var(--rs);border:none;cursor:pointer;">📝 理解度テスト25問に挑戦する →</button>
+      <button id="goto-quiz-btn" style="background:var(--navy);color:#fff;font-weight:700;font-size:14px;font-family:'Noto Sans JP',sans-serif;padding:13px 32px;border-radius:var(--rs);border:none;cursor:pointer;">📝 理解度テスト25問に挑戦する →</button>
     </div>
   </div>
 </div>
@@ -677,7 +693,7 @@ const TRAINING = [
       { type:'論文', typeBg:'#e6f0fb', typeColor:'#1e2761', name:'Anthropic Research Papers', desc:'Constitutional AI・スケーリング則・解釈可能性研究など最前線の論文。定期的にチェック必須。', url:'anthropic.com/research' },
       { type:'論文', typeBg:'#e6f0fb', typeColor:'#1e2761', name:'arXiv cs.AI / cs.LG', desc:'生成AI・LLM・エージェント・安全性の最新プレプリント論文が毎日公開される。Semantic Scholarで整理するのがおすすめ。', url:'arxiv.org/list/cs.AI/recent' },
       { type:'論文', typeBg:'#e6f0fb', typeColor:'#1e2761', name:'OpenAI Research', desc:'GPTシリーズ・o1・RLHF・スーパーアライメントなどOpenAIの最新研究を直接参照する。', url:'openai.com/research' },
-      { type:'コミュニティ', typeBg:'#e1f5ee', typeColor:'#0f6e56', name:'AI Engineer World's Fair', desc:'世界最大規模のAIエンジニア・リサーチャー向けカンファレンス。最前線のセッションが多数。', url:'ai.engineer' },
+      { type:'コミュニティ', typeBg:'#e1f5ee', typeColor:'#0f6e56', name:'AI Engineer World\'s Fair', desc:'世界最大規模のAIエンジニア・リサーチャー向けカンファレンス。最前線のセッションが多数。', url:'ai.engineer' },
       { type:'コミュニティ', typeBg:'#e1f5ee', typeColor:'#0f6e56', name:'NeurIPS / ICML / ICLR', desc:'AI・機械学習分野のトップ国際会議。論文・発表動画が公開されており、最先端研究を追える。', url:'neurips.cc' },
       { type:'ニュースレター', typeBg:'#faeeda', typeColor:'#854f0b', name:'The Batch（DeepLearning.AI）', desc:'Andrew Ngが週次で発行するAIニュースレター。業界動向・論文要約・実務への示唆が充実。', url:'deeplearning.ai/the-batch' },
       { type:'ニュースレター', typeBg:'#faeeda', typeColor:'#854f0b', name:'Import AI（Jack Clark）', desc:'Anthropic共同創業者が発行するAI研究・政策の週次ニュースレター。研究者・政策立案者必読。', url:'importai.substack.com' },
@@ -731,14 +747,14 @@ function answerQ(i) {
   answers[curQ] = i;
   renderQuizQuestion();
 }
-function nextQ() { if (curQ < 24) { curQ++; renderQuizQuestion(); window.scrollTo({top: document.querySelector('.quiz-header').offsetTop - 60, behavior:'smooth'}); } }
-function prevQ() { if (curQ > 0) { curQ--; renderQuizQuestion(); window.scrollTo({top: document.querySelector('.quiz-header').offsetTop - 60, behavior:'smooth'}); } }
+function nextQ() { if (curQ < 24) { curQ++; renderQuizQuestion(); const h = document.querySelector('.quiz-header'); if(h) window.scrollTo({top: h.offsetTop - 60, behavior:'smooth'}); } }
+function prevQ() { if (curQ > 0) { curQ--; renderQuizQuestion(); const h = document.querySelector('.quiz-header'); if(h) window.scrollTo({top: h.offsetTop - 60, behavior:'smooth'}); } }
 function retakeQuiz() {
   curQ = 0; answers = new Array(25).fill(null);
   document.getElementById('quiz-section').style.display = '';
   document.getElementById('result-section').classList.remove('visible');
   renderQuizQuestion();
-  window.scrollTo({top: document.querySelector('.quiz-header').offsetTop - 60, behavior:'smooth'});
+  const h = document.querySelector('.quiz-header'); if(h) window.scrollTo({top: h.offsetTop - 60, behavior:'smooth'});
 }
 
 function showResult() {
@@ -821,14 +837,35 @@ function showPart(idx, btn) {
   }
   document.querySelectorAll('.part-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
   if (idx === 5) {
-    document.getElementById('quiz-section').style.display = '';
-    document.getElementById('result-section').classList.remove('visible');
+    const qs = document.getElementById('quiz-section');
+    const rs = document.getElementById('result-section');
+    if (qs) qs.style.display = '';
+    if (rs) rs.classList.remove('visible');
     renderQuizQuestion();
   }
-  window.scrollTo({top: document.querySelector('.part-nav').offsetTop - 10, behavior:'smooth'});
+  try {
+    const nav = document.querySelector('.part-nav');
+    if (nav) window.scrollTo({top: nav.offsetTop - 10, behavior:'smooth'});
+    else window.scrollTo({top: 0, behavior:'smooth'});
+  } catch(e) {
+    window.scrollTo({top: 0, behavior:'smooth'});
+  }
 }
 
 renderQuizQuestion();
+
+// ── ナビゲーション：イベントリスナー方式 ──
+document.querySelectorAll('.part-tab[data-part], .part-tab-jump[data-part]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    showPart(parseInt(this.dataset.part), this);
+  });
+});
+var gotoQuiz = document.getElementById('goto-quiz-btn');
+if (gotoQuiz) {
+  gotoQuiz.addEventListener('click', function() {
+    showPart(5, document.querySelector('.quiz-tab'));
+  });
+}
 
 </script>
 </body>

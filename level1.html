@@ -4,269 +4,420 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lv.1 入門 研修プログラム — 生成AI最新動向 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f4f0;--surface:#fff;--surface2:#f0ede8;--border:#e0dcd4;
-  --text:#1a1814;--text2:#6b6760;--text3:#9e9b96;
-  --navy:#1e2761;--mid:#4a6fa5;--r:10px;--rs:6px;
-  --accent:#854f0b;--accent-bg:#faeeda;
+  --bg:#f4f3ef;
+  --surface:#ffffff;
+  --surface2:#f0ede8;
+  --border:#e2ddd6;
+  --text:#18160f;
+  --text2:#635e55;
+  --text3:#9e9890;
+  --accent:#c05a00;
+  --accent-light:#fff4e6;
+  --accent-mid:#e07020;
+  --r:12px;--rs:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
 
-/* Header */
-.page-header{background:var(--navy);color:#fff;padding:0;}
-.header-top{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid rgba(255,255,255,.1);}
-.back-btn{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:14px;text-decoration:none;font-family:'Noto Sans JP',sans-serif;padding:6px 14px;border:1px solid rgba(255,255,255,.2);border-radius:20px;transition:all .15s;}
-.back-btn:hover{color:#fff;border-color:rgba(255,255,255,.5);}
-.site-label{font-size:12px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);}
-.header-hero{padding:3rem 2rem 3.5rem;max-width:860px;margin:0 auto;}
-.level-badge{display:inline-block;background:#faeeda;color:#854f0b;font-size:13px;font-weight:700;padding:6px 18px;border-radius:20px;margin-bottom:1rem;}
-.score-range{font-size:12px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.5);margin-left:10px;}
-.page-title{font-size:clamp(24px,4vw,38px);font-weight:700;margin-bottom:.75rem;line-height:1.3;}
-.page-subtitle{font-size:16px;color:rgba(255,255,255,.65);line-height:1.8;max-width:600px;}
+/* ── HEADER ── */
+.site-bar{background:var(--text);display:flex;align-items:center;justify-content:space-between;padding:.75rem 2rem;position:sticky;top:0;z-index:100;}
+.back-link{color:rgba(255,255,255,.65);font-size:13px;text-decoration:none;display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;letter-spacing:.04em;transition:color .15s;}
+.back-link:hover{color:#fff;}
+.site-name{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.35);}
 
-/* Progress bar decoration */
-.header-bar{height:4px;background:#854f0b;}
+/* ── HERO ── */
+.hero{background:var(--accent);padding:5rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.06);}
+.hero::after{content:'';position:absolute;left:-60px;bottom:-100px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04);}
+.hero-inner{max-width:800px;margin:0 auto;position:relative;}
+.level-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);color:#fff;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:.08em;padding:5px 14px;border-radius:20px;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,.2);}
+.hero-title{font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:1rem;letter-spacing:-.02em;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:540px;line-height:1.8;margin-bottom:2rem;}
+.hero-score{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 16px;font-size:13px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.8);}
 
-/* Main */
-.container{max-width:860px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+/* Progress tracker */
+.progress-tracker{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 2rem;}
+.progress-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:16px;}
+.progress-label{font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);white-space:nowrap;}
+.progress-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1);width:0%;}
+.progress-pct{font-size:13px;font-family:'DM Mono',monospace;color:var(--accent);font-weight:500;min-width:36px;text-align:right;}
 
-/* Section */
-.sec-eyebrow{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.1em;margin-bottom:.75rem;}
-.sec-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:1.5rem;}
-hr.sec{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+/* ── MAIN ── */
+.main{max-width:800px;margin:0 auto;padding:3rem 1.5rem 5rem;}
 
-/* Steps */
-.steps{display:flex;flex-direction:column;gap:14px;margin-bottom:.5rem;}
-.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;display:flex;gap:16px;align-items:flex-start;}
-.step-num{background:#854f0b;color:#fff;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.step-body{flex:1;}
-.step-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
-.step-title{font-size:16px;font-weight:700;color:var(--text);}
-.step-time{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:10px;}
+/* Section titles */
+.sec-eyebrow{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.14em;margin-bottom:.625rem;}
+.sec-title{font-size:24px;font-weight:700;color:var(--text);margin-bottom:.5rem;}
+.sec-sub{font-size:15px;color:var(--text2);margin-bottom:1.75rem;line-height:1.7;}
+.sec-divider{border:none;border-top:1px solid var(--border);margin:3rem 0;}
+
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;gap:12px;}
+.step-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:start;transition:box-shadow .2s;}
+.step-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);}
+.step-badge{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.step-num{background:var(--accent);color:#fff;font-size:13px;font-weight:700;font-family:'DM Mono',monospace;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-time{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--surface2);padding:3px 8px;border-radius:10px;white-space:nowrap;text-align:center;}
+.step-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;}
 .step-desc{font-size:14px;color:var(--text2);line-height:1.8;}
 
-/* Checklist */
+/* ── MINI QUIZ ── */
+.quiz-intro{background:var(--accent-light);border-left:4px solid var(--accent);border-radius:0 var(--rs) var(--rs) 0;padding:14px 18px;margin-bottom:1.5rem;font-size:14px;color:var(--text2);line-height:1.7;}
+.mini-q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:12px;}
+.mini-q-num{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);letter-spacing:.1em;margin-bottom:.625rem;font-weight:500;}
+.mini-q-text{font-size:16px;font-weight:700;color:var(--text);margin-bottom:1.25rem;line-height:1.6;}
+.mini-q-opts{display:flex;flex-direction:column;gap:8px;}
+.q-opt{padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;cursor:pointer;color:var(--text);background:var(--surface);text-align:left;font-family:'Noto Sans JP',sans-serif;line-height:1.55;transition:all .15s;}
+.q-opt:hover:not(:disabled){background:var(--accent-light);border-color:var(--accent);}
+.q-opt.correct{background:#e1f5ee;border-color:#5dcaa5;color:#085041;}
+.q-opt.wrong{background:#fcebeb;border-color:#f09595;color:#791f1f;}
+.mini-q-fb{margin-top:12px;padding:12px 16px;border-radius:var(--rs);font-size:14px;line-height:1.75;}
+.mini-q-fb.ok{background:#e1f5ee;color:#085041;}
+.mini-q-fb.ng{background:#fcebeb;color:#791f1f;}
+.quiz-score-banner{background:var(--accent);color:#fff;border-radius:var(--rs);padding:1rem 1.5rem;text-align:center;margin-top:1rem;font-size:15px;font-weight:700;display:none;}
+
+/* ── CHECKLIST ── */
 .checklist{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;}
-.checklist-intro{font-size:14px;color:var(--text2);margin-bottom:1.25rem;}
-.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.checklist-intro{font-size:14px;color:var(--text2);margin-bottom:1.25rem;line-height:1.7;}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;}
 .check-item:last-child{border-bottom:none;}
-.check-item input{margin-top:3px;width:18px;height:18px;cursor:pointer;flex-shrink:0;accent-color:#854f0b;}
-.check-label{font-size:15px;color:var(--text2);line-height:1.65;cursor:pointer;}
+.check-item input{display:none;}
+.check-mark{width:20px;height:20px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:var(--surface);}
+.check-item input:checked + .check-mark{background:var(--accent);border-color:var(--accent);}
+.check-item input:checked + .check-mark::after{content:'✓';color:#fff;font-size:12px;font-weight:700;}
+.check-text{font-size:15px;color:var(--text2);line-height:1.65;transition:color .2s;}
+.check-item input:checked ~ .check-text{color:var(--text3);text-decoration:line-through;}
 
-/* Resources */
-.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
-.resource-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s;}
-.resource-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08);}
-.resource-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.resource-type{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;white-space:nowrap;}
-.resource-name{font-size:15px;font-weight:700;color:var(--text);}
-.resource-desc{font-size:13px;color:var(--text2);line-height:1.7;flex:1;}
-.resource-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#854f0b;text-decoration:none;padding:8px 16px;border:1.5px solid #854f0b;border-radius:var(--rs);transition:all .15s;align-self:flex-start;}
-.resource-link:hover{background:#faeeda;}
-.resource-link::after{content:'→';}
+/* ── RESOURCES ── */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.res-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:all .2s;}
+.res-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1);transform:translateY(-2px);border-color:var(--accent);}
+.res-top{display:flex;align-items:center;gap:8px;}
+.res-type{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;}
+.res-name{font-size:15px;font-weight:700;color:var(--text);}
+.res-desc{font-size:13px;color:var(--text2);line-height:1.7;flex:1;}
+.res-link{font-size:13px;font-weight:700;color:var(--accent);margin-top:4px;}
 
-/* CTA */
-.cta-box{background:var(--navy);border-radius:var(--r);padding:2rem;text-align:center;margin-top:3rem;}
-.cta-box h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:.5rem;}
-.cta-box p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:1.5rem;}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;background:#faeeda;color:#854f0b;font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;transition:opacity .15s;border:none;cursor:pointer;}
-.cta-btn:hover{opacity:.88;}
+/* ── CTA ── */
+.cta-section{background:var(--accent);border-radius:var(--r);padding:2.5rem 2rem;text-align:center;margin-top:3rem;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);}
+.cta-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:.5rem;}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.65);margin-bottom:1.5rem;}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--accent);font-weight:700;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;transition:opacity .15s;}
+.cta-btn-primary:hover{opacity:.9;}
+.cta-btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;font-weight:500;font-size:15px;font-family:'Noto Sans JP',sans-serif;padding:12px 28px;border-radius:var(--rs);text-decoration:none;border:1.5px solid rgba(255,255,255,.4);transition:all .15s;}
+.cta-btn-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7);}
 
-footer{text-align:center;padding:1.5rem;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);}
+/* Footer */
+footer{text-align:center;padding:2rem 1.5rem;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;border-top:1px solid var(--border);}
 
-@media(max-width:600px){
-  .header-hero{padding:2rem 1rem 2.5rem;}
-  .container{padding:2rem 1rem 4rem;}
-  .step-card{flex-direction:column;gap:10px;}
-  .resource-grid{grid-template-columns:1fr;}
+/* Animations */
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.anim-1{animation:fadeSlideUp .5s ease both;}
+.anim-2{animation:fadeSlideUp .5s .1s ease both;}
+.anim-3{animation:fadeSlideUp .5s .2s ease both;}
+
+@media(max-width:640px){
+  .hero{padding:3rem 1rem 2.5rem;}
+  .main{padding:2rem 1rem 4rem;}
+  .step-card{grid-template-columns:1fr;}
+  .step-badge{flex-direction:row;}
+  .res-grid{grid-template-columns:1fr;}
+  .site-bar{padding:.75rem 1rem;}
+  .progress-tracker{padding:1rem;}
+  .cta-buttons{flex-direction:column;align-items:stretch;}
 }
 </style>
 </head>
 <body>
 
-<header class="page-header">
-  <div class="header-top">
-    <a href="index.html" class="back-btn">← 学習コンテンツに戻る</a>
-    <span class="site-label">生成AI最新動向 2026</span>
-  </div>
-  <div class="header-hero">
-    <div>
-      <span class="level-badge">Lv.1 入門</span>
-      <span class="score-range">テストスコア：0〜9点</span>
+<div class="site-bar">
+  <a href="index.html" class="back-link">← 学習コンテンツに戻る</a>
+  <span class="site-name">生成AI最新動向 2026</span>
+</div>
+
+<section class="hero anim-1">
+  <div class="hero-inner">
+    <div class="level-chip">
+      <span>LEVEL 1</span>
+      <span style="opacity:.5;">|</span>
+      <span>Lv.1 入門</span>
     </div>
-    <h1 class="page-title">AIビギナー向け学習プログラム</h1>
-    <p class="page-subtitle">まずはAIの全体像を掴み、実際に触ってみることが最優先です</p>
+    <h1 class="hero-title">AIビギナー<br>学習プログラム</h1>
+    <p class="hero-sub">まずはAIの全体像を掴み、実際に触ってみることが最優先です</p>
+    <div class="hero-score">テストスコア：0〜9点</div>
   </div>
-  <div class="header-bar"></div>
-</header>
+</section>
 
-<main class="container">
+<div class="progress-tracker">
+  <div class="progress-inner">
+    <span class="progress-label">チェックリスト達成度</span>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+    <span class="progress-pct" id="prog-pct">0%</span>
+  </div>
+</div>
 
-  <!-- Steps -->
-  <p class="sec-eyebrow">LEARNING STEPS</p>
-  <h2 class="sec-title">学習ステップ</h2>
-  <div class="steps">
+<main class="main">
+
+  <!-- STEPS -->
+  <section class="anim-2">
+    <p class="sec-eyebrow">LEARNING STEPS</p>
+    <h2 class="sec-title">学習ステップ</h2>
+    <p class="sec-sub">このレベルの方が優先的に取り組むべき5つのステップです。順番通りに進めることをおすすめします。</p>
+    <div class="steps">
+      
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">01</span>
+            <span class="step-time">1〜2時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">基本用語を理解する</h3>
+            <p class="step-desc">LLM・プロンプト・トークン・ハルシネーション・マルチモーダルなど、AIを語るうえで必要な基礎用語をひと通り把握しましょう。難しく考えず「ふんわり理解」でOKです。まず言葉を知るだけで、ニュースやAI関連の話題がぐっと身近に感じられるようになります。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">02</span>
+            <span class="step-time">1〜2時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">ChatGPTを実際に使ってみる</h3>
+            <p class="step-desc">百聞は一見にしかず。まず無料版のChatGPT（chat.openai.com）で使い始めましょう。「今日の夕食を提案して」「この文章をわかりやすく直して」など身近なタスクから試してみてください。うまくいかなくても気にしない。試すことが全てです。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">03</span>
+            <span class="step-time">1時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">Claudeも試してみる</h3>
+            <p class="step-desc">claude.aiの無料版でChatGPTと同じ質問をしてみましょう。出力の違いを体感することがAI理解の近道です。「なぜ違うのか？」を考えるだけで理解が深まります。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">04</span>
+            <span class="step-time">1時間</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">AIが使える業務・使えない業務を整理する</h3>
+            <p class="step-desc">自分の日常業務を紙に書き出し、「AIに任せられそうなもの」と「人間がやるべきもの」に分類してみましょう。この分類作業自体がAI活用思考のトレーニングになります。</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-badge">
+            <span class="step-num">05</span>
+            <span class="step-time">30分</span>
+          </div>
+          <div class="step-body">
+            <h3 class="step-title">AIの安全な使い方を学ぶ</h3>
+            <p class="step-desc">情報漏洩・著作権・ハルシネーションの3大リスクを理解し、社内規定を確認しましょう。個人情報・機密情報は入力しない、がAI活用の鉄則です。「便利だから何でもOK」ではなく、正しく使うことが長期的な活用につながります。</p>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider">
+
+  <!-- MINI QUIZ -->
+  <section class="anim-3">
+    <p class="sec-eyebrow">MINI QUIZ</p>
+    <h2 class="sec-title">理解確認クイズ</h2>
+    <div class="quiz-intro">このレベルのポイントを3問でチェックします。学習ステップを読んでから挑戦してみましょう。</div>
     
-    <div class="step-card">
-      <div class="step-num">Step 1</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">基本用語を理解する</span>
-          <span class="step-time">⏱ 1〜2時間</span>
+        <div class="mini-q-card" id="mq_0">
+          <div class="mini-q-num">Q1</div>
+          <p class="mini-q-text">「ハルシネーション」とは何ですか？</p>
+          <div class="mini-q-opts"><button class="q-opt" onclick="answerMini(0,0)" id="qo_0_0">AIが人間の感情を理解する能力</button>
+<button class="q-opt" onclick="answerMini(0,1)" id="qo_0_1">AIがもっともらしい嘘をつく現象</button>
+<button class="q-opt" onclick="answerMini(0,2)" id="qo_0_2">AIが学習データを記憶する仕組み</button>
+<button class="q-opt" onclick="answerMini(0,3)" id="qo_0_3">AIが複数の言語を扱う機能</button>
+</div>
+          <div class="mini-q-fb" id="fb_0" style="display:none;"></div>
         </div>
-        <div class="step-desc">LLM・プロンプト・トークン・ハルシネーション・マルチモーダルなど、AIを語るうえで必要な基礎用語をひと通り把握する。難しく考えず「ふんわり理解」でOK。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 2</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">ChatGPTを実際に使ってみる</span>
-          <span class="step-time">⏱ 1〜2時間</span>
+        <div class="mini-q-card" id="mq_1">
+          <div class="mini-q-num">Q2</div>
+          <p class="mini-q-text">生成AIを業務で使う際に最も注意すべきことは何ですか？</p>
+          <div class="mini-q-opts"><button class="q-opt" onclick="answerMini(1,0)" id="qo_1_0">英語で入力しないと精度が下がる</button>
+<button class="q-opt" onclick="answerMini(1,1)" id="qo_1_1">機密情報・個人情報を入力しない</button>
+<button class="q-opt" onclick="answerMini(1,2)" id="qo_1_2">無料プランでは使い物にならない</button>
+<button class="q-opt" onclick="answerMini(1,3)" id="qo_1_3">AIの出力はすべて正確なので確認不要</button>
+</div>
+          <div class="mini-q-fb" id="fb_1" style="display:none;"></div>
         </div>
-        <div class="step-desc">まず無料版で使い始める。「今日の夕食を提案して」「この文章をわかりやすく直して」など身近なタスクから試す。うまくいかなくても気にしない。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 3</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">Claudeも試してみる</span>
-          <span class="step-time">⏱ 1時間</span>
+        <div class="mini-q-card" id="mq_2">
+          <div class="mini-q-num">Q3</div>
+          <p class="mini-q-text">ChatGPTとClaudeの最も大きな違いとして正しいのはどれですか？</p>
+          <div class="mini-q-opts"><button class="q-opt" onclick="answerMini(2,0)" id="qo_2_0">ChatGPTは有料、Claudeは完全無料</button>
+<button class="q-opt" onclick="answerMini(2,1)" id="qo_2_1">運営会社・設計思想・出力の特性が異なる</button>
+<button class="q-opt" onclick="answerMini(2,2)" id="qo_2_2">ClaudeはコーディングができないがChatGPTはできる</button>
+<button class="q-opt" onclick="answerMini(2,3)" id="qo_2_3">ChatGPTは日本語に対応していない</button>
+</div>
+          <div class="mini-q-fb" id="fb_2" style="display:none;"></div>
         </div>
-        <div class="step-desc">claude.aiの無料版でChatGPTと同じ質問をしてみる。出力の違いを体感することが、AI理解の近道。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 4</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">AIが使える業務・使えない業務を整理する</span>
-          <span class="step-time">⏱ 1時間</span>
-        </div>
-        <div class="step-desc">自分の日常業務を書き出し、「AIに任せられそうなもの」と「人間がやるべきもの」に分類してみる。これがAI活用の第一歩。</div>
-      </div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">Step 5</div>
-      <div class="step-body">
-        <div class="step-head">
-          <span class="step-title">AIの安全な使い方を学ぶ</span>
-          <span class="step-time">⏱ 30分</span>
-        </div>
-        <div class="step-desc">情報漏洩・著作権・ハルシネーションの3大リスクを理解し、社内規定を確認する。個人情報・機密情報は入力しない、が鉄則。</div>
-      </div>
-    </div>
-  </div>
+    <div class="quiz-score-banner" id="quiz-banner"></div>
+  </section>
 
-  <hr class="sec">
+  <hr class="sec-divider">
 
-  <!-- Checklist -->
-  <p class="sec-eyebrow">ACHIEVEMENT CHECKLIST</p>
-  <h2 class="sec-title">達成チェックリスト</h2>
-  <div class="checklist">
-    <p class="checklist-intro">以下の項目をクリアできたら、次のレベルへ進む準備ができています。</p>
-    
-    <div class="check-item">
-      <input type="checkbox" id="c0">
-      <label class="check-label" for="c0">ChatGPTかClaudeで実際に5回以上会話したことがある</label>
+  <!-- CHECKLIST -->
+  <section>
+    <p class="sec-eyebrow">ACHIEVEMENT CHECKLIST</p>
+    <h2 class="sec-title">達成チェックリスト</h2>
+    <p class="sec-sub">以下の項目をクリアできたら、次のレベルへ進む準備ができています。チェックを入れると進捗が更新されます。</p>
+    <div class="checklist">
+      <p class="checklist-intro">✅ できたものにチェックを入れていきましょう。全部チェックできたら次のレベルへ！</p>
+      
+          <label class="check-item" for="ck_0">
+            <input type="checkbox" id="ck_0" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">ChatGPTかClaudeで実際に5回以上会話したことがある</span>
+          </label>
+          <label class="check-item" for="ck_1">
+            <input type="checkbox" id="ck_1" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">「プロンプト」という言葉の意味を人に説明できる</span>
+          </label>
+          <label class="check-item" for="ck_2">
+            <input type="checkbox" id="ck_2" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">ハルシネーションとは何かを理解している</span>
+          </label>
+          <label class="check-item" for="ck_3">
+            <input type="checkbox" id="ck_3" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">自分の業務でAIが使えそうな場面を3つ挙げられる</span>
+          </label>
+          <label class="check-item" for="ck_4">
+            <input type="checkbox" id="ck_4" onchange="updateProgress()">
+            <span class="check-mark"></span>
+            <span class="check-text">社内のAI利用ガイドラインを確認した</span>
+          </label>
     </div>
-    <div class="check-item">
-      <input type="checkbox" id="c1">
-      <label class="check-label" for="c1">「プロンプト」という言葉の意味を人に説明できる</label>
-    </div>
-    <div class="check-item">
-      <input type="checkbox" id="c2">
-      <label class="check-label" for="c2">ハルシネーションとは何かを理解している</label>
-    </div>
-    <div class="check-item">
-      <input type="checkbox" id="c3">
-      <label class="check-label" for="c3">自分の業務でAIが使えそうな場面を3つ挙げられる</label>
-    </div>
-    <div class="check-item">
-      <input type="checkbox" id="c4">
-      <label class="check-label" for="c4">社内のAI利用ガイドラインを確認した</label>
-    </div>
-  </div>
+  </section>
 
-  <hr class="sec">
+  <hr class="sec-divider">
 
-  <!-- Resources -->
-  <p class="sec-eyebrow">RECOMMENDED RESOURCES</p>
-  <h2 class="sec-title">おすすめリソース</h2>
-  <div class="resource-grid">
-    
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">ChatGPT公式ヘルプセンター</span>
-      </div>
-      <div class="resource-desc">ChatGPTの使い方・機能・料金プランを公式で確認。まず最初に読むべき公式ガイド。</div>
-      <a href="https://help.openai.com" target="_blank" rel="noopener" class="resource-link">公式サイトを開く</a>
+  <!-- RESOURCES -->
+  <section>
+    <p class="sec-eyebrow">RECOMMENDED RESOURCES</p>
+    <h2 class="sec-title">おすすめリソース</h2>
+    <p class="sec-sub">このレベルに最適なリソースを厳選しました。クリックして外部サイトで確認できます。</p>
+    <div class="res-grid">
+      
+        <a href="https://chat.openai.com" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">ChatGPT</div>
+          <div class="res-desc">まず最初に試すべきAI。無料版でも十分に機能を体験できる。アカウント登録だけで今日から始められる。</div>
+          <div class="res-link">ChatGPTを開く →</div>
+        </a>
+        <a href="https://claude.ai" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">Claude（claude.ai）</div>
+          <div class="res-desc">Anthropicが開発するAI。日本語の自然さに定評があり、文章作成・要約・分析が得意。</div>
+          <div class="res-link">Claudeを開く →</div>
+        </a>
+        <a href="https://docs.anthropic.com/ja" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">Anthropic プロンプトガイド</div>
+          <div class="res-desc">効果的なプロンプトの書き方を公式が解説。初心者が最初に読むべき実践的な入門ガイド。</div>
+          <div class="res-link">ガイドを読む →</div>
+        </a>
+        <a href="https://coursera.org/learn/google-ai-essentials" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e1f5ee;color:#085041;">無料</span>
+          </div>
+          <div class="res-name">Google AI Essentials（Coursera）</div>
+          <div class="res-desc">Googleが提供するAI入門コース。修了証も取得でき、AI知識を体系的に学べる。</div>
+          <div class="res-link">コースを見る →</div>
+        </a>
+        <a href="https://www.amazon.co.jp/s?k=ChatGPT+仕事術大全" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
+          </div>
+          <div class="res-name">「ChatGPT×仕事術大全」</div>
+          <div class="res-desc">ビジネスパーソン向けのAI活用入門書。そのまま使えるプロンプト例が豊富で実践的。</div>
+          <div class="res-link">Amazonで探す →</div>
+        </a>
+        <a href="https://www.amazon.co.jp/s?k=生成AI+衝撃" target="_blank" rel="noopener" class="res-card">
+          <div class="res-top">
+            <span class="res-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
+          </div>
+          <div class="res-name">「生成AIの衝撃」（日経BP）</div>
+          <div class="res-desc">生成AIが社会・ビジネスに与える影響を読み解く入門書。背景知識をつけるのに最適。</div>
+          <div class="res-link">Amazonで探す →</div>
+        </a>
     </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">Claude（claude.ai）</span>
-      </div>
-      <div class="resource-desc">Anthropicが提供するClaude。無料で使い始められる。日本語の自然さに定評あり。</div>
-      <a href="https://claude.ai" target="_blank" rel="noopener" class="resource-link">Claudeを開く</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">Anthropic プロンプトガイド</span>
-      </div>
-      <div class="resource-desc">効果的なプロンプトの書き方を公式が解説。初心者が最初に読むべき実践ガイド。</div>
-      <a href="https://docs.anthropic.com/ja" target="_blank" rel="noopener" class="resource-link">ガイドを読む</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e1f5ee;color:#085041;">無料</span>
-        <span class="resource-name">Google AI Essentials（Coursera）</span>
-      </div>
-      <div class="resource-desc">Googleが提供するAI入門コース。修了証も取得できる。無料で受講可能。</div>
-      <a href="https://coursera.org/learn/google-ai-essentials" target="_blank" rel="noopener" class="resource-link">コースを見る</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#fee2e2;color:#991b1b;">YouTube</span>
-        <span class="resource-name">【2026年版】ChatGPT完全入門</span>
-      </div>
-      <div class="resource-desc">日本語で丁寧に解説された入門動画。まず1本見るならこのシリーズがおすすめ。</div>
-      <a href="https://youtube.com/results?search_query=ChatGPT+入門+2026" target="_blank" rel="noopener" class="resource-link">動画を見る</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
-        <span class="resource-name">「ChatGPT×仕事術大全」</span>
-      </div>
-      <div class="resource-desc">ビジネスパーソン向けのAI活用入門書。具体的なプロンプト例が豊富でそのまま使える。</div>
-      <a href="https://www.amazon.co.jp/s?k=ChatGPT+仕事術" target="_blank" rel="noopener" class="resource-link">Amazonで探す</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-top">
-        <span class="resource-type" style="background:#e8f0fb;color:#1a5fa8;">本</span>
-        <span class="resource-name">「生成AIの衝撃」（日経BP）</span>
-      </div>
-      <div class="resource-desc">生成AIが社会・ビジネスに与える影響を読み解く入門書。背景知識をつけるのに最適。</div>
-      <a href="https://www.amazon.co.jp/s?k=生成AI+衝撃+日経BP" target="_blank" rel="noopener" class="resource-link">Amazonで探す</a>
-    </div>
-  </div>
+  </section>
 
   <!-- CTA -->
-  <div class="cta-box">
-    <h3>もう一度テストに挑戦する</h3>
-    <p>知識を深めたら、理解度テストで再チャレンジしてみましょう。</p>
-    <a href="index.html" class="cta-btn">テストに挑戦する</a>
+  <div class="cta-section">
+    <h3 class="cta-title">次のステップへ進みましょう</h3>
+    <p class="cta-sub">学習を続けて、さらに上のレベルを目指しましょう</p>
+    <div class="cta-buttons">
+      <a href="level2.html" class="cta-btn-primary">Lv.2 基礎へ →</a>
+      <a href="index.html" class="cta-btn-secondary">テストに再挑戦する</a>
+    </div>
   </div>
 
 </main>
 
 <footer>生成AI最新動向 2026 · Lv.1 入門 研修プログラム · Powered by Claude Pro</footer>
 
+<script>
+const QUIZ_DATA = [{"ans": 1, "exp": "ハルシネーションとは、AIが事実と異なる情報をもっともらしく生成してしまう現象です。ChatGPTなどの大規模言語モデルは、確率的に「それらしい」文章を生成するため、誤った情報を自信満々に返すことがあります。"}, {"ans": 1, "exp": "機密情報や個人情報をAIサービスに入力すると、データが学習に使われたり、外部に漏洩するリスクがあります。プランや設定に関わらず、センシティブな情報は入力しないのが原則です。"}, {"ans": 1, "exp": "ChatGPT（OpenAI製）とClaude（Anthropic製）は、運営会社・安全性設計・文章の特性などが異なります。どちらにも無料プランがあり、タスクによって向き不向きがあります。"}];
+const answered = {};
+let quizCorrect = 0;
+
+function answerMini(qi, oi) {
+  if (answered[qi] !== undefined) return;
+  answered[qi] = oi;
+  const correct = QUIZ_DATA[qi].ans;
+  const exp = QUIZ_DATA[qi].exp;
+
+  for (let i = 0; i < 4; i++) {
+    const btn = document.getElementById(`qo_${qi}_${i}`);
+    if (!btn) continue;
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct');
+    else if (i === oi) btn.classList.add('wrong');
+  }
+
+  const fb = document.getElementById(`fb_${qi}`);
+  const isOk = oi === correct;
+  if (isOk) quizCorrect++;
+  fb.className = `mini-q-fb ${isOk ? 'ok' : 'ng'}`;
+  fb.innerHTML = `<strong>${isOk ? '✓ 正解！' : '✗ 不正解。'}</strong> ${exp}`;
+  fb.style.display = '';
+
+  if (Object.keys(answered).length === QUIZ_DATA.length) {
+    const banner = document.getElementById('quiz-banner');
+    banner.textContent = `クイズ結果：${quizCorrect} / ${QUIZ_DATA.length} 正解${quizCorrect === QUIZ_DATA.length ? ' 🎉 全問正解！' : ''}`;
+    banner.style.display = '';
+  }
+}
+
+function updateProgress() {
+  const checks = document.querySelectorAll('.check-item input');
+  const done = [...checks].filter(c => c.checked).length;
+  const pct = Math.round(done / checks.length * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+</script>
 </body>
 </html>
